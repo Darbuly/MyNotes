@@ -1,0 +1,93 @@
+1.建立4个表
+2.模拟数据
+	写node /*注意要把status设置为0
+	写role
+	写access
+	写user
+3.RBAC配置
+
+/*
+	RBAC配置
+	 */
+	'USER_AUTH_ON'=>true,
+	'USER_AUTH_TYPE'=>1,
+	'USER_AUTH_KEY'=>'authID',
+	//'ADMIN_AUTH_KEY'=>'administrator',
+	'REQUIRE_AUTH_MODULE'=>'',
+	'NOT_AUTH_MODULE'=>'Public',
+	'USER_AUTH_GATEWAY'=>'/Public/login',
+	//'RBAC_DB_DSN  数据库连接DSN
+	'RBAC_ROLE_TABLE'=>'dbl_role',
+	'RBAC_USER_TABLE'=>'dbl_role_user',/*不要把这个写错了*/
+	'RBAC_ACCESS_TABLE'=>'dbl_access',
+	'RBAC_NODE_TABLE'=>'dbl_node'
+
+4.公yong控制器的编写
+	initial
+
+public function _initialize(){
+		if(C('USER_AUTH_ON') && !in_array(MODULE_NAME,explode(',',C('NOT_AUTH_MODULE'))) ){
+			$rbac = new \Org\Util\Rbac();
+			if(!$rbac->AccessDecision()){
+				if(!$_SESSION[C('USER_AUTH_KEY')]){
+					echo "没有登录！";
+				}
+				if(C('GUEST_AUTH_ON')){
+					//游客模式
+				}
+				echo "没有权限";
+			}
+		}else{
+
+		}
+	}
+5.公共控制器用户登录的编写
+public function login(){
+		if(!empty($_POST)){
+			var_dump($_POST);
+			if(empty($_POST['username'])){
+				$this->error('用户名必须写！');
+			}
+
+			$verify = new \Think\Verify();
+			if(!$verify->check($_POST['verify'])){
+				$this->error('验证码错误！');
+			}
+			//RBAC验证
+			$map = array(
+				'username'=>$_POST['username'],
+				'active'=>array('gt',0),
+				);
+			$rbac = new \Org\Util\Rbac();
+			$user = $rbac->authenticate($map);
+			if(empty($user)){
+				$this->error('用户不存在或者被禁用');
+			}else{
+				//验证密码
+				if($user['password']!=md5($_POST['password'])){
+					$this->error('密码错误！');
+				}else{
+					//记录登录
+					$_SESSION[C('USER_AUTH_KEY')]=$user['id'];
+					$_SESSION['email']=$user['email'];
+					if($user['username']=='admin'){
+						$_SESSION[C('ADMIN_AUTH_KEY')]=true;
+					}
+					$u = M('user');
+					$data = array(
+						'id'=>$user['id'],
+						'last_login_date'=>date('Y-m-d H:i:s')
+						);
+					if(!$u->save($data)){
+						$this->error('登录失败');
+					}else{
+						$rbac->saveAccessList();
+						$this->success('登录成功','/Admin/index');
+					}
+				}
+			}
+		}else{
+			$this->display();
+		}
+	}
+6.测试

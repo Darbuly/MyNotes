@@ -1,0 +1,120 @@
+app_init 应用初始化标签位 
+module_check 模块检测标签位（3.2.1版本新增） 
+path_info PATH_INFO检测标签位 
+app_begin 应用开始标签位 
+action_name 操作方法名标签位 
+action_begin 控制器开始标签位 
+view_begin 视图输出开始标签位 
+view_template 视图模板解析标签位 
+view_parse 视图解析标签位 
+template_filter 模板解析过滤标签位 
+view_filter 视图输出过滤标签位 
+view_end 视图输出结束标签位 
+action_end 控制器结束标签位 
+app_end 应用结束标签位 
+
+行为名称 说明 对应标签位置 
+BuildLite 生成Lite文件（3.2.1版本新增） app_init 
+ParseTemplate 模板文件解析，并支持第三方模板引擎驱动 view_parse 
+ShowPageTrace 页面Trace功能行为，完成页面Trace功能 view_end 
+ShowRuntime 运行时间显示行为，完成运行时间显示 view_filter 
+TokenBuild 令牌生成行为，完成表单令牌的自动生成 view_filter 
+ReadHtmlCache 读取静态缓存行为 app_init 
+WriteHtmlCache 生成静态缓存行为 view_filter 
+
+
+
+//1 控制器  2  视图
+array (size=13)
+  'app_init' => 
+    array (size=2)
+      1 => 
+        array (size=6)
+          'ruleid' => int 1
+          'tagname' => string 'app_init' (length=8)
+          '_type' => int 2
+          'module' => string '' (length=0)
+          'behavior' => string 'BuildLiteBehavior' (length=17)
+          'class' => string 'Behavior\BuildLiteBehavior' (length=26)
+      7 => 
+        array (size=6)
+          'ruleid' => int 7
+          'tagname' => string 'app_init' (length=8)
+          '_type' => int 2
+          'module' => string 'Common' (length=6)
+          'behavior' => string 'AppInitBehavior' (length=15)
+          'class' => string 'Common\Behavior\AppInitBehavior' (length=31)
+  'path_info' => boolean false
+  'app_begin' => 
+    array (size=2)
+      2 => 
+        array (size=6)
+          'ruleid' => int 2
+          'tagname' => string 'app_begin' (length=9)
+          '_type' => int 2
+          'module' => string '' (length=0)
+          'behavior' => string 'ReadHtmlCacheBehavior' (length=21)
+          'class' => string 'Behavior\ReadHtmlCacheBehavior' (length=30)
+      8 => 
+        array (size=6)
+          'ruleid' => int 8
+          'tagname' => string 'app_begin' (length=9)
+          '_type' => int 2
+          'module' => string 'Common' (length=6)
+          'behavior' => string 'AppBeginBehavior' (length=16)
+          'class' => string 'Common\Behavior\AppBeginBehavior' (length=32)
+  'action_name' => boolean false
+  'action_begin' => boolean false
+  'view_begin' => 
+    array (size=1)
+      9 => 
+        array (size=6)
+          'ruleid' => int 9
+          'tagname' => string 'view_begin' (length=10)
+          '_type' => int 2
+          'module' => string 'Common' (length=6)
+          'behavior' => string 'ViewBeginBehavior' (length=17)
+          'class' => string 'Common\Behavior\ViewBeginBehavior' (length=33)
+  'view_parse' => 
+    array (size=1)
+      4 => 
+        array (size=6)
+          'ruleid' => int 4
+          'tagname' => string 'view_parse' (length=10)
+          '_type' => int 2
+          'module' => string '' (length=0)
+          'behavior' => string 'ParseTemplateBehavior' (length=21)
+          'class' => string 'Behavior\ParseTemplateBehavior' (length=30)
+  'template_filter' => 
+    array (size=1)
+      5 => 
+        array (size=6)
+          'ruleid' => int 5
+          'tagname' => string 'template_filter' (length=15)
+          '_type' => int 2
+          'module' => string '' (length=0)
+          'behavior' => string 'ContentReplaceBehavior' (length=22)
+          'class' => string 'Behavior\ContentReplaceBehavior' (length=31)
+  'view_filter' => 
+    array (size=1)
+      6 => 
+        array (size=6)
+          'ruleid' => int 6
+          'tagname' => string 'view_filter' (length=11)
+          '_type' => int 2
+          'module' => string '' (length=0)
+          'behavior' => string 'WriteHtmlCacheBehavior' (length=22)
+          'class' => string 'Behavior\WriteHtmlCacheBehavior' (length=31)
+  'view_end' => boolean false
+  'action_end' => boolean false
+  'app_end' => 
+    array (size=1)
+      3 => 
+        array (size=6)
+          'ruleid' => int 3
+          'tagname' => string 'app_end' (length=7)
+          '_type' => int 2
+          'module' => string '' (length=0)
+          'behavior' => string 'ShowPageTraceBehavior' (length=21)
+          'class' => string 'Behavior\ShowPageTraceBehavior' (length=30)
+  'appframe_rbac_init' => boolean false

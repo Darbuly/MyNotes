@@ -1,0 +1,65 @@
+1.写SQL
+2.模拟数据
+	modules     对应挂件名
+	params      里面必须有{a参数，......,style='样式名称'}//样式名称为menu是经典模式
+3.新建Modules控制器ModulesController.class.php
+
+<?php
+/*
+模块控制器
+ */
+namespace Admin\Controller;
+use Think\Controller;
+class ModulesController extends Controller{
+	public function index(){
+		$mod = M('Modules');
+		$list = $mod->where("position='left'")->select();
+		//取出style
+		foreach ($list as $key => $value) {
+			$tmp = explode(',', $value['params']);
+			$tmp2 = explode('=',$tmp[count($tmp)-1]);
+			$list[$key]['mod']=$value['modules'].'/'.$tmp2[1];
+		}
+		$this->assign('modlist',$list);
+		$this->display();
+	}
+}
+?>
+
+4.编写Modules_index.html
+<html>  
+    <head>  
+        <title>IndexController>Index</title>  
+        <meta charset="UTF-8">  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    </head>  
+    <body>  
+        <volist name='modlist' id='row'>
+        <p>{$row['title']}</p> 
+        {:W($row['mod'],array('params'=>$row['params']))}  /*这里重新把参数传进去*/
+        </volist>
+    </body>  
+</html>
+5.新建Widget文件夹（并列Controller）新建LatestNewsWidget.class.php
+<?php
+/*
+最新文章木块
+ */
+namespace Admin\Widget;
+use Think\Controller;
+class LatestNewsWidget extends Controller{
+	public function latestnews($data){
+		//取出sid和cid
+		$tmp = explode(',',$data);
+		$sid = explode('=',$tmp[0]);//sid
+		$cid = explode('=',$tmp[1]);//cid
+			
+		$article = M('article');
+		$list = $article->where('sectionid='.$sid[1].' and catid='.$cid[1])->select();
+		$this->assign('alist',$list);
+		$this->display('LatestNews:latestnews');
+
+	}
+}
+?>
+6.写魔术方法
