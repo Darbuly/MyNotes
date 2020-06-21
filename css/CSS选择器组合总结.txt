@@ -1,0 +1,15 @@
+
+
+
+空格读“里面的所有这些”；
+逗号读“跟”；
+类.类读“并且又是...的情况下...”
+>读“里面的一层”
+
+练习：
+
+.morph-button-fixed, .morph-button-fixed .morph-content
+morph-button-fixed类跟morph-button-fixed类里面所有的morph-content类
+为什么不直接：
+.morph-button-fixed,.morph-content
+因为这样更准确，BUG少

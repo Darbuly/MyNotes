@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>圣杯布局</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		#header {
+			height: 88px;
+			background-color: pink;
+		}
+		#content {
+			padding:0 200px;
+			overflow: hidden;
+		}
+		#content .middle,#content .left,#content .right {
+			padding-bottom: 10000px;
+			margin-bottom: -10000px;
+		}
+		#content .middle {
+			float: left;
+			width:100%;
+			background-color: skyblue;
+		}
+		#content .left {
+			position:relative;
+			left: -200px;
+			width:200px;
+			float:left;
+			margin-left: -100%;
+			background-color: purple;
+		}
+		#content .right {
+			position:relative;
+			right: -200px;
+			width:200px;
+			float:left;
+			margin-left: -200px;
+			background-color: green;
+		}
+		#footer {
+			height: 99px;
+			background-color:red;
+		}
+
+		.clearfix:before, .clearfix:after {
+			content: "";
+			display: table;
+		}
+		.clearfix:after {
+			clear:both;
+		}
+		.clearfix{
+			*zoom:1;
+		}
+	</style>
+</head>
+<body>
+	<div id="header"></div>
+	<div id="content" class="clearfix">
+		<div class="middle">
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+		middle<br>
+	</div>
+		<div class="left">left</div>
+		<div class="right">right</div>
+	</div>
+	<div id="footer"></div>
+</body>
+</html>

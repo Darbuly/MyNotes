@@ -1,0 +1,160 @@
+1.¿½±´HTML
+<div class="bannerArea" id="banner_area" visible="show" change="false" data-remove="true">
+<div class="bannerBg"></div>
+<div class="bannerCon" style="height: 200px;">
+  <div id="full_banner" class="fullBanner" style="height: 200px;">
+   <ul class="banner-pic banner-pic-1" style="width: 2560px; transition-duration: 400ms; transform: translateX(-1920px);">
+            <li change="true" style="width: 640px; height: 200px; line-height: 200px; float: left; background-image: url(&quot;./img/banner1.jpg&quot;); background-size: 100% 100%;"><a title="½¹µãÍ¼02" href="#" style="background-image: none;"></a></li>
+        	 <li bigpic="./img/banner1.jpg" change="true" style="width: 640px; height: 200px; line-height: 200px; float: left; background-image: url(&quot;./img/banner2.jpg&quot;); background-size: 100% 100%;"><a title="½¹µãÍ¼02" href="#" style="background-image: none;"></a></li>
+        	 <li change="true" style="width: 640px; height: 200px; line-height: 200px; float: left; background-image: url(&quot;./img/banner1.jpg&quot;); background-size: 100% 100%;"><a title="½¹µãÍ¼02" href="#" style="background-image: none;"></a></li>
+        	 <li bigpic="./img/banner1.jpg" change="true" style="width: 640px; height: 200px; line-height: 200px; float: left; background-image: url(&quot;./img/banner2.jpg&quot;); background-size: 100% 100%;"><a title="½¹µãÍ¼02" href="#" style="background-image: none;"></a></li>
+            </ul>
+  </div>
+  <div id="banner_nav" class="banner-nav-1"></div>
+</div>
+</div>
+
+2.¿½±´CSS
+<style type="text/css">
+.bannerArea {
+    margin: auto;
+    position: relative;
+    z-index: 26;
+}
+.bannerArea {
+    width: 100%;
+    margin: 0px auto 5px;
+    position: relative;
+    z-index: 26;
+}
+.bannerBg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 1;
+}
+.bannerCon {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    height: 150px;
+}
+.fullBanner {
+    margin: 0px auto;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+}
+.banner-pic-1 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.banner-nav-1 {
+    position: absolute;
+    right: 0px;
+    height: 15px;
+    bottom: 0px;
+    width: 100%;
+    z-index: 10;
+    text-align: center;
+}
+
+.banner-nav-1 span {
+    display: inline-block;
+    overflow: hidden;
+    width: 10px;
+    height: 10px;
+    line-height: 0px;
+    margin-left: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: gray;
+}
+.banner-nav-1 .cur {
+    background-color: #FF4500;
+}
+</style>
+3.¿½±´JS
+<script type="text/javascript">
+var aGlobalBannerHeight = {};
+$(function(){
+	var bStyle = "1",span="",bn = $("#banner_nav"),banner = $("#full_banner");
+	banner.height(banner.parent().height());
+	switch(bStyle){
+			case "1" :
+				bn.attr("class","banner-nav-1");
+				banner.find("li").each(function(){
+					span += "<span></span>";
+				});
+			break;
+			case "2" :
+				bn.attr("class","banner-nav-2");
+				banner.find("li").each(function(e){
+					span += '<span>'+(e+1)+'</span>';
+				});
+			break;
+			case "3" :
+				bn.attr("class","banner-nav-3")	;
+				banner.find("li").each(function(){
+					span += '<span><img src="'+$(this).attr("smallpic")+'" /></span>';
+				});
+			break;
+		}
+		bn.append(span);
+	var changeBannerBg = function(num){
+		bn.find("span").removeClass("cur").eq(num).addClass("cur");
+		var li = banner.find("li").eq(num);
+		if(li.attr("change")=="false"){
+			var bg = li.attr("bigpic"),img = $("<img src="+bg+" />");
+			img.load(function(){
+				li.css({"background-image":"url("+bg+")","background-size":"100% 100%"});
+				li.attr("change",true);
+				li.find("a").css("background-image","none");
+			})
+		}
+	}
+	changeBannerBg(0);
+	new $.Swipe(banner[0], {
+		startSlide:0,
+		direction:"LMove",
+		speed:400,
+		auto:Number(6)*1000,
+		callback: function(){
+			changeBannerBg(this.index);
+		}
+	});
+});
+
+$(function() {
+	aGlobalBannerHeight.banner = parseInt($("#full_banner ul li:eq(0)").height()),
+	setBannerHeight();
+})
+
+$(window).resize(function(){
+	setTimeout(function(){
+		setBannerHeight();
+	},500);
+})
+function setBannerHeight() {
+	var
+		oBanner = $("#full_banner"),
+		iPicMaxWidth = 640,
+		iWindowWidth = $(window).width();
+
+	if (iWindowWidth > iPicMaxWidth) {
+		var iRealityHeight = aGlobalBannerHeight.banner*2;
+	} else if (iWindowWidth > 0) {
+		iBfbWidth = (iWindowWidth / iPicMaxWidth).toFixed(2);
+		var iRealityHeight = parseInt(aGlobalBannerHeight.banner * iBfbWidth) * 2;
+	}
+	oBanner.parent().height(iRealityHeight);
+	oBanner.height(iRealityHeight);
+	oBanner.find('li').height(iRealityHeight);
+}
+</script>
+4.¼ÓÔØÊó±êÍÏ×§JS
+<script type="text/javascript" src="./3_files/swipe.js"></script>
+5.ÐÞ¸ÄÍ¼Æ¬
