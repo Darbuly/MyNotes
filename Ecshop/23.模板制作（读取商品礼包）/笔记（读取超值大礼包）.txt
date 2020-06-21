@@ -1,0 +1,13 @@
+﻿读取超值礼包
+变量：$package_goods_list
+foreach $package_goods_list变量里的value1
+$value.act_name 礼包名称
+再去foreach $value1.goods_list 里面value2
+对应的$value2.goods_name商品名
+对应的$value2.goods_number商品数量
+原价：$value1.subtotal
+礼包价：$value1.package_price
+节省：$value1.saving
+礼包id：$value1.act_id
+
+添加礼包到购物车需要调用addPackageToCart($value1.act_id)这个js函数，然后参数是礼包ID

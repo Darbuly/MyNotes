@@ -1,0 +1,5 @@
+﻿读取商品相册
+foreach $pictures变量
+value里面的thumb_url表示缩略图（小图）
+value里面的img_url表示缩略图（大图/原图）
+value里面的img_desc表示图片的描述

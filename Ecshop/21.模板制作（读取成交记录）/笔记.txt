@@ -1,0 +1,2 @@
+﻿{insert name=""  /}读取动态内容
+name	内容标识 如：bought_notes可以调用商品购买记录
