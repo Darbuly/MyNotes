@@ -1,0 +1,6 @@
+
+1.在site map 中 右键需要爬行的网页，
+2.先加入scope进行制定过滤
+3.再加入spiter进行爬行
+4.可以在Spider选项卡里面的option进行对爬虫的设定
+5.sitemap 里面就有一些网页的目录
