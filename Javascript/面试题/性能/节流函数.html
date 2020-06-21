@@ -1,0 +1,82 @@
+<div id="content" style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:#ccc;font-size:80px;"></div>
+ <div id="content_2" style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:red;font-size:80px;"></div>
+ <div id="content_3" style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:blue;font-size:80px;"></div>
+  <div id="content_4" style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:green;font-size:80px;"></div>
+   <div id="content_5" style="height:150px;line-height:150px;text-align:center; color: #fff;background-color:orange;font-size:80px;"></div>
+<script>
+    let num = 1;
+    let content = document.getElementById('content');
+ 
+    function count() {
+        content.innerHTML = num++;
+    };
+    content.onmousemove = count;
+
+    //函数抖动-非立即执行版
+    let content2 = document.getElementById('content_2');
+
+    function debounce(func,wait){
+    	let timer
+    	return function () {
+    		let that = this	//保存that 因为setTimeout里面会更改this
+    		let args = arguments//保存that 因为setTimeout里面会更改arguments
+
+    		if(timer) clearTimeout(timer)
+
+   			timer = setTimeout(()=>{
+   				func.apply(that,args)	
+   			},wait)
+    	}
+    }
+    content2.onmousemove = debounce(count,1000)
+
+    //立即执行版
+    function debounce2(func,wait){
+    	let timer
+    	return function () {
+    		let that = this
+    		let args = arguments
+
+    		if(timer) clearTimeout(timer)
+
+    		let callNow = !timer
+    		timer = setTimeout(()=>{
+    			timer = null
+    		},wait)
+    		if(callNow) func.apply(this,args)
+    	}
+    }
+    let content3 = document.getElementById('content_3');
+    content3.onmousemove = debounce2(count,1000)
+
+    //时间戳版
+    function throttle(func,wait){
+    	let previous = 0
+    	return function(){
+    		let now = Date.now()
+    		if(now-previous>wait){
+    			func.apply(this,arguments)
+    			previous = now
+    		}
+    	}
+    }
+    let content4 = document.getElementById('content_4');
+    content4.onmousemove = throttle(count,1000)
+
+    //定时器：没有油了我一直加油版
+    function throttle2(func,wait){
+    	let timeout
+    	return function (){
+    		let that = this
+    		let args = arguments
+    		if(!timeout){
+    			timeout = setTimeout(()=>{
+    				timeout = null
+    				func.apply(that,args)
+    			},wait)
+    		}
+    	}
+    }
+    let content5 = document.getElementById('content_5');
+    content5.onmousemove = throttle(count,1000)
+</script>

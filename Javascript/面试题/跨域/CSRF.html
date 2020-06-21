@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>CSRF</title>
+</head>
+<body>
+	<script type="text/javascript">
+		//jsonp法
+		// STEP1:创建回调
+		function fun(data){
+			console.log(data)
+		}
+		// STEP2:创建标签
+		var body = document.getElementByTagName('body')[0]
+		var script = document.createElement('script')
+		// STEP3:写标签属性
+		script.type = 'text/javascript'
+		script.src = 'helloJsonp.php?callback=fun'
+		// STEP4:加入并触发
+		body.appendChild(script)
+	</script>
+</body>
+</html>

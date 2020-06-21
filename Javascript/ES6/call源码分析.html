@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		function sum(a,b) {
+			console.log(this)
+			return a+b;
+		}
+
+		function Person(name, age) {
+			this.name = name
+			this.age = age
+		}
+		// var xiaoming = new Student("xiaoming",12,140)
+		// Person.call(this,name,age)分析：
+		Person.prototype.myCall = function (context) {//context = student 
+			//必要的数据监测
+		  if (typeof this !== 'function') {
+		    throw new TypeError('not funciton')
+		  }
+
+  //核心代码原理分析：
+  //建立A.B.C环境，拷贝person的构造函数镜像到C，通过A.B.C改变this来执行该镜像
+  //
+  //Step1：A.B.C，
+  //	准备如果context为null,就默认为window
+  context = context || window   //student = student
+
+  //Step2 :用=Fn来拷贝person的构造函数镜像
+  context.fn = this		
+  //student.fn = Person.prototype
+  //= Person的构造函数镜像
+  //=()=>{this.name = name...}
+  //Step3: 执行参数准备：
+  let arg = [...arguments].slice(1) //argument/[student,"xiaoming",12,140]=>["xiaoming",12,140]
+  //Step4: 通过A.B.C改变this来执行：
+  let result = context.fn(...arg)  
+  //result=Person.prototype("xiaoming",12)
+  //=Person的构造函数镜像执行
+  //=()=>{this.name = name...}("xiaoming",12)
+  //=()=>{this.name = "xiaoming"...})() //这里的this指向context也就是student,故
+  //=()=>{student.name = "xiaoming"...}()
+  //Step5 删除A.B.C环境，恢复现场
+  delete context.fn 
+  //Step6 返回执行后的返回值
+  return result
+} 
+// Person.myCall(this,name,age) 等价于
+// Person（name,age）//不以 对象. 改变this的方式进入执行{this.name=name;this.age=age}
+		function Student(name, age, price) {
+
+			Person.myCall(this,name,age) //相当于：this.name = name this.age=age
+													//在子类型构造函数中通过call来调用父类型的函数
+													//
+													//
+			this.price = price
+		}
+
+
+
+	</script>
+</head>
+<body>
+	
+</body>
+</html>	
