@@ -1,0 +1,6 @@
+# 将 test 目录打包成一个文件，-r 表示递归打包包含子目录的全部内容，-q 表示安静模式，-o 表示输出文件，其后紧跟打包输出文件名
+zip -r -q -o test.zip  /home/test
+# 使用 du 命令查看打包后文件的大小
+du -h test.zip
+# 使用 file 命令查看文件大小和类型
+file test.zip

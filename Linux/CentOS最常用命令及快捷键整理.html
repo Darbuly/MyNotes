@@ -1,0 +1,380 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>CentOS最常用命令及快捷键整理</title>
+<meta name="keywords" content="CentOS,常用,命令,快捷键,整理,最近,开始,Linu" />
+<meta name="description" content="" />
+<link href="/templets/style/dedecms.css" rel="stylesheet" media="screen" type="text/css" />
+<script src="/images/js/j.js" language="javascript" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+<!--
+function CheckLogin(){
+	  var taget_obj = document.getElementById('_ajax_feedback');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/member/ajax_feedback.php");
+	  DedeXHTTP = null;
+}
+function postBadGood(ftype,fid)
+{
+	var taget_obj = document.getElementById(ftype+fid);
+	var saveid = GetCookie('badgoodid');
+	if(saveid != null)
+	{
+		var saveids = saveid.split(',');
+		var hasid = false;
+		saveid = '';
+		j = 1;
+		for(i=saveids.length-1;i>=0;i--)
+		{
+			if(saveids[i]==fid && hasid) continue;
+			else {
+				if(saveids[i]==fid && !hasid) hasid = true;
+				saveid += (saveid=='' ? saveids[i] : ','+saveids[i]);
+				j++;
+				if(j==10 && hasid) break;
+				if(j==9 && !hasid) break;
+			}
+		}
+		if(hasid) { alert('您刚才已表决过了喔！'); return false;}
+		else saveid += ','+fid;
+		SetCookie('badgoodid',saveid,1);
+	}
+	else
+	{
+		SetCookie('badgoodid',fid,1);
+	}
+	myajax = new DedeAjax(taget_obj,false,false,'','','');
+	myajax.SendGet2("/plus/feedback.php?aid="+fid+"&action="+ftype+"&fid="+fid);
+}
+function postDigg(ftype,aid)
+{
+	var taget_obj = document.getElementById('newdigg');
+	var saveid = GetCookie('diggid');
+	if(saveid != null)
+	{
+		var saveids = saveid.split(',');
+		var hasid = false;
+		saveid = '';
+		j = 1;
+		for(i=saveids.length-1;i>=0;i--)
+		{
+			if(saveids[i]==aid && hasid) continue;
+			else {
+				if(saveids[i]==aid && !hasid) hasid = true;
+				saveid += (saveid=='' ? saveids[i] : ','+saveids[i]);
+				j++;
+				if(j==20 && hasid) break;
+				if(j==19 && !hasid) break;
+			}
+		}
+		if(hasid) { alert("您已经顶过该帖，请不要重复顶帖 ！"); return; }
+		else saveid += ','+aid;
+		SetCookie('diggid',saveid,1);
+	}
+	else
+	{
+		SetCookie('diggid',aid,1);
+	}
+	myajax = new DedeAjax(taget_obj,false,false,'','','');
+	var url = "/plus/digg_ajax.php?action="+ftype+"&id="+aid;
+	myajax.SendGet2(url);
+}
+function getDigg(aid)
+{
+	var taget_obj = document.getElementById('newdigg');
+	myajax = new DedeAjax(taget_obj,false,false,'','','');
+	myajax.SendGet2("/plus/digg_ajax.php?id="+aid);
+	DedeXHTTP = null;
+}
+-->
+</script>
+</head>
+<body class="articleview">
+<div class="header">
+ 	<div class="top w960 center">
+       <div class="title">
+         <h1> <a href="http://www.centoscn.com"></a> </h1>
+       </div>
+       <div class="banner">
+ <a title="CentOS7.0.140" href="https://www.jingfengjiaoyu.com/linux/"><img  src="/uploads/allimg/170212/1-1F212011R3A5.jpg"/></a>
+</div>
+       <div class="rlink">
+         <ul>
+          <a title="CentOS7.0.140" href="http://www.centoscn.com/CentosSoft/iso/2015/0402/5070.html"><img  src="/money/donate.png"/></a>
+         </ul>
+       </div>
+ 	</div><!-- //top -->
+ 	<!-- //菜单 -->
+ 	<div class="module blue mT10 wrapper w963">
+   	<div class="top" id="mytop">
+     	<div class="t_l"></div>
+     	<div class="t_r"></div>
+     	<!-- //如果不使用currentstyle，可以在channel标签加入 cacheid='channeltoplist' 属性提升性能 -->
+     <div id="navMenu">
+     	<ul>
+       	<li><a href='/'>首页</a></li>
+       	<li class='hover'><a href='/CentOS/'  rel='dropmenu1'>CentOS入门</a></li>
+       	<li><a href='/CentosSoft/'  rel='dropmenu6'>CentOS下载</a></li>
+       	
+       	<li><a href='/image-text/'  rel='dropmenu8'>CentOS教程</a></li>
+       	
+       	<li><a href='/CentosServer/'  rel='dropmenu7'>CentOS服务器</a></li>
+       	
+       	<li><a href='/shell/' >shell编程</a></li>
+       	
+       	<li><a href='/CentosSecurity/'  rel='dropmenu9'>安全防御</a></li>
+       	
+       	<li><a href='/CentosBug/'  rel='dropmenu3'>故障解决</a></li>
+       	
+       	<li><a href='/yunwei/'  rel='dropmenu16'>运维管理</a></li>
+       	
+       	<li><a href='http://www.cncentos.com' >中文论坛</a></li>
+       	
+     	</ul>
+     </div>	
+      <!-- sonMenu 子栏目 开始-->
+     <link href="/templets/style/tabs.css" type="text/css" rel="stylesheet"/>
+ 
+     <div class="sonMenu">
+ 		<ul>
+ 		  <li><a >推荐:<a style="color: #FF0000;"> </a> 
+                          <li><a target="_blank" href="http://www.linuxprobe.com/" >Linux就该这么学</a></li>
+                          <li><a target="_blank" href="http://xy.magedu.com/linuxyunwei.html?wztf=liwl_wzmc_CentOS_zly" >学习linux</a></li>
+                          <li><a target="_blank" href="http://cn.linux.vbird.org/" >鸟哥linux私房菜</a></li>
+                         <li><a href="http://www.centoscn.com/yunwei/news/2012/1227/131.html" >开源镜像大全</a></li>
+                             <li><a target="_blank" href="http://linux.51yip.com/" >Linux命令查询</a></li>                    
+ 		  <li><a>Q群： 282491757</a></li>
+                         <li><a>微信公众号：centoscn </a></li>
+		</ul>
+ 		<!-- sonMenu 子栏目 结束-->    <!-- //search -->
+	 	
+ 	</div>
+ 
+     <div class="threead"><a  target="_blank"  href="http://www.centoscn.com/CentosSoft/iso/2015/0402/5070.html"><img  src="/money/new960.jpg.jpg"/></a>
+
+ 	        </div>	
+ 	</div></div> 
+<a target="_blank" title="Linux就该这么学" href="http://www.linuxprobe.com/"><img  src="/uploads/allimg/170226/1-1F2261I14H21.gif"/></a>
+<a target="_blank" title="马哥教育" href="https://jq.qq.com/?_wv=1027&k=47wqet6?utm_source=wztf_cenTOS"><img  src="/uploads/allimg/170209/1-1F209150616109.gif"/></a>
+
+<!-- //header -->
+ 
+ <div style="margin-top:2px;padding-top:0px;border:solid 1px #9FD1F6;width:958px;" class="header">
+ <div style="margin-top:0px;padding-top:0px;" class="module blue mT10 wrapper w963">
+   <div style="margin-top:0px;padding-top:0px;" class="search">
+       <form action="/plus/search.php" name="formsearch">
+         <div class="form">
+           <h4>搜索</h4>
+            <input type="hidden" name="kwtype" value="0" />
+            <input name="keyword" type="text" class="search-keyword" id="search-keyword" />
+            <select name="searchtype" class="search-option" id="search-option">
+                <option value="titlekeyword" selected='1'>智能模糊搜索</option>
+                <option value="title">仅搜索标题</option>
+            </select>
+           <button type="submit" class="search-submit">搜索</button>
+         </div>
+         </form>
+       <div class="tags">
+         <h4>热门标签</h4>
+         <ul>
+           
+         </ul>
+         </div>
+         </div>
+     </div>
+     </div><!-- //search -->
+ </div>
+<!-- /header -->
+
+
+</div><!-- /channel-nav -->
+
+<div class="w960 center clear mt1">
+	<div class="pleft">
+		<div class="place">
+			<strong>当前位置:</strong> <a href='http://www.centoscn.com/'></a> > <a href='/CentOS/'>CentOS入门</a> > <a href='/CentOS/help/'>基础命令</a> > 
+		</div><!-- /place -->
+		<div class="viewbox">
+			<div class="title">
+				<h2>CentOS最常用命令及快捷键整理</h2>
+			</div><!-- /title -->
+			<div class="info">
+				<small>时间:</small>2014-03-06 00:44<small>来源:</small>blog.csdn.net  <small>作者:</small>dragon_dream <a href="/plus/erraddsave.php?aid=2493&title=CentOS最常用命令及快捷键整理" target="_blank">举报</a>   <small>点击:</small><script src="/plus/count.php?view=yes&aid=2493&mid=1" type='text/javascript' language="javascript"></script>次</div><!-- /info -->
+
+			<div class="content">
+
+
+</SPAN>
+<p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> 最近开始学Linux，在VMware Player中安装了CentOS 6.4。为方便自己也方便他人，整理了Linux常用命令及快捷键。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#000099;">常用命令:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">文件和目录:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cd /home &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;进入 &#39;/home&#39; 目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cd .. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;返回上一级目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cd ../.. &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 返回上两级目录 </p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cd - &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 返回上次所在目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cp file1 file2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;将file1复制为file2</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cp -a dir1 dir2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 复制一个目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cp -a /tmp/dir1 . &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;复制一个目录到当前工作目录（.代表当前目录）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ls &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;查看目录中的文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ls -a &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;显示隐藏文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ls -l &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示详细信息</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ls -lrt &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 按时间显示文件（l表示详细列表，r表示反向排序，t表示按时间排序）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># pwd &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;显示工作路径</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># mkdir dir1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 创建 &#39;dir1&#39; 目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># mkdir dir1 dir2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;同时创建两个目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># mkdir -p /tmp/dir1/dir2 &nbsp; &nbsp;创建一个目录树</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># mv dir1 dir2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;移动/重命名一个目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># rm -f file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;删除 &#39;file1&#39;</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># rm -rf dir1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 删除 &#39;dir1&#39; 目录及其子目录内容</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">查看文件内容:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cat file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;从第一个字节开始正向查看文件的内容</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># head -2 file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 查看一个文件的前两行 </p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># more file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 查看一个长文件的内容</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tac file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;从最后一行开始反向查看一个文件的内容</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tail -3 file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;查看一个文件的最后三行</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">文本处理:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># grep str /tmp/test &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在文件 &#39;/tmp/test&#39; 中查找 &quot;str&quot;</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># grep ^str /tmp/test &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在文件 &#39;/tmp/test&#39; 中查找以 &quot;str&quot; 开始的行</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># grep [0-9] /tmp/test &nbsp; &nbsp; &nbsp; &nbsp; 查找 &#39;/tmp/test&#39; 文件中所有包含数字的行</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># grep str -r /tmp/* &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在目录 &#39;/tmp&#39; 及其子目录中查找 &quot;str&quot;</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># diff file1 file2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 找出两个文件的不同处</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># sdiff file1 file2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 以对比的方式显示两个文件的不同</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">查找:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find / -name file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 从 &#39;/&#39; 开始进入根文件系统查找文件和目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find / -user user1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;查找属于用户 &#39;user1&#39; 的文件和目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find /home/user1 -name \*.bin &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在目录 &#39;/ home/user1&#39; 中查找以 &#39;.bin&#39; 结尾的文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find /usr/bin -type f -atime +100 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 查找在过去100天内未被使用过的执行文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find /usr/bin -type f -mtime -10 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 查找在10天内被创建或者修改过的文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># locate \*.ps &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 寻找以 &#39;.ps&#39; 结尾的文件，先运行 &#39;updatedb&#39; 命令</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find -name &#39;*.[ch]&#39; | xargs grep -E &#39;expr&#39; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;在当前目录及其子目录所有.c和.h文件中查找 &#39;expr&#39;</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find -type f -print0 | xargs -r0 grep -F &#39;expr&#39; &nbsp; &nbsp; &nbsp; &nbsp;在当前目录及其子目录的常规文件中查找 &#39;expr&#39;</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># find -maxdepth 1 -type f | xargs grep -F &#39;expr&#39; &nbsp; &nbsp;在当前目录中查找 &#39;expr&#39;</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">压缩和解压:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># bzip2 file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 压缩 file1</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># bunzip2 file1.bz2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;解压 file1.bz2</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># gzip file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 压缩 file1</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># gzip -9 file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;最大程度压缩 file1</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># gunzip file1.gz &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;解压 file1.gz</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tar -cvf archive.tar file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 把file1打包成 archive.tar</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:white;">（-c: 建立压缩档案；-v: 显示所有过程；-f: 使用档案名字，是必须的，是最后一个参数）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tar -cvf archive.tar file1 dir1 &nbsp; &nbsp; &nbsp; &nbsp;把 file1，dir1 打包成 archive.tar</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tar -tf archive.tar &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示一个包中的内容</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tar -xvf archive.tar &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;释放一个包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># tar -xvf archive.tar -C /tmp &nbsp; &nbsp; &nbsp; &nbsp; 把压缩包释放到 /tmp目录下</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># zip file1.zip file1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;创建一个zip格式的压缩包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># zip -r file1.zip file1 dir1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 把文件和目录压缩成一个zip格式的压缩包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># unzip file1.zip &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 解压一个zip格式的压缩包到当前目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># unzip test.zip -d /tmp/ &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 解压一个zip格式的压缩包到 /tmp 目录</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">yum工具:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum -y install [package] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;下载并安装一个rpm包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum localinstall [package.rpm] &nbsp; &nbsp;安装一个rpm包，使用你自己的软件仓库解决所有依赖关系</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum -y update &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;更新当前系统中安装的所有rpm包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum update [package] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 更新一个rpm包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum remove [package] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;删除一个rpm包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum list &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;列出当前系统中安装的所有包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum search [package] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 在rpm仓库中搜寻软件包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum clean [package] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 清除缓存目录（/var/cache/yum）下的软件包</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum clean headers &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;删除所有头文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># yum clean all &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;删除所有缓存的包和头文件</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">网络:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ifconfig eth0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示一个以太网卡的配置</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ifconfig eth0 192.168.1.1 netmask 255.255.255.0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;配置网卡的IP地址</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ifdown eth0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;禁用 &#39;eth0&#39; 网络设备</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ifup eth0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;启用 &#39;eth0&#39; 网络设备</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># iwconfig eth1 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示一个无线网卡的配置</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># iwlist scan &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示无线网络</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># ip addr show &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示网卡的IP地址</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#3366ff;">其他:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># su - &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 切换到root权限（与su有区别）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># shutdown -h now &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 关机</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># shutdown -r now &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;重启</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># top &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;罗列使用CPU资源最多的linux任务 （输入q退出）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># pstree &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 以树状图显示程序</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># man ping &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;查看参考手册（例如ping 命令）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># passwd &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;修改密码</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># df -h &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示磁盘的使用情况</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cal -3 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示前一个月，当前月以及下一个月的月历</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># cal 10 1988 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 显示指定月，年的月历</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"># date --date &#39;1970-01-01 UTC 1427888888 seconds&#39; &nbsp; 把一相对于1970-01-01 00:00的秒数转换成时间</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"><strong><span style="color:#000099;">常用快捷键:</span></strong></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;"> &nbsp; &nbsp; &nbsp; &nbsp;CentOS 6.4 中可以通过系统-&gt;首选项-&gt;键盘快捷键来设置快捷键，如图所示。例如可将运行终端的快捷键设为Ctrl+Alt+T。</p><p><img src="/uploads/allimg/20140306/13940378853207.png" style="float:none;" title="33.png" /><img src="/uploads/allimg/20140306/13940378859405.png" title="333.png" style="float:none;" /></p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + u &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;删除光标之前到行首的字符</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + k &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;删除光标之前到行尾的字符</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + c &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;取消当前行输入的命令，相当于Ctrl + Break</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + a &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;光标移动到行首（ahead of line），相当于通常的Home键</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + e &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;光标移动到行尾（end of line）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + f &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 光标向前（forward）移动一个字符位置</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + b &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;光标往回（backward）移动一个字符位置</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + l &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 清屏，相当于执行clear命令</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + r &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;显示:号提示，根据用户输入查找相关历史命令（reverse-i-search）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + w &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 删除从光标位置前到当前所处单词（word）的开头</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + t &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 交换光标位置前的两个字符</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + y &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;粘贴最后一次被删除的单词</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Ctrl + Alt + d &nbsp; 显示桌面</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + b &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 光标往回（backward）移动到前一个单词</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + d &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 删除从光标位置到当前所处单词的末尾</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + F2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 运行</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + F4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 关闭当前窗口</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + F9 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 最小化当前窗口</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + F10 &nbsp; &nbsp; &nbsp; &nbsp; 最大化当前窗口</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt + Tab &nbsp; &nbsp; &nbsp; &nbsp; 切换窗口</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">Alt +按住左键 &nbsp;移动窗口（或在最下面的任务栏滚动鼠标滑轮）</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">[鼠标中间键] 粘贴突出显示的文本。使用鼠标左键来选择文本。把光标指向想粘贴文本的地方。点击鼠标中间键来粘贴。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">[Tab] 命令行自动补全。使用 shell 提示时可使用这一方式。键入命令或文件名的前几个字符，然后按 [Tab] 键，它会自动补全命令或显示匹配键入字符的所有命令。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">在桌面或文件管理器中直接按 / 就可以输入位置，打开文件管理器。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">快速搜索：在 vi 或 Firefox 中直接按 / 即可进入搜索状态。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">网站链接和图片可直接拖放到桌面或者目录，可以马上下载。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">直接将文件管理器中的文件拖到终端中就可以在终端中得到完整的路径名。</p><p style="color:#333333;font-family:arial;font-size:14px;line-height:26px;background-color:#ffffff;">在滚动条的空白处点击鼠标中键，屏幕即滚动到那个地方。</p><p><br /></p>
+			<table width='100%'>
+				
+			</table>
+			</div><!-- /content --><div class="dede_pages">
+				<ul class="pagelist">
+          
+				</ul>
+			</div><!-- /pages -->
+			
+			<!-- //顶踩 -->
+			<div class="newdigg" id="newdigg">
+
+<!-- //顶踩部份的源码结束 -->
+			
+			<div class="boxoff">				<strong>------分隔线----------------------------</strong>
+			</div>
+			<div class="handle"></div>
+				<div class="context">
+					<ul>
+						<li>上一篇：<a href='/CentOS/help/2014/0226/2476.html'>一些常用非常不错的CentOS系统常用命令</a> </li>
+						<li>下一篇：<a href='/CentOS/help/2014/0306/2495.html'>CentOS新手必备：Linux vi命令</a> </li>
+					</ul>
+				</div><!-- /context -->
+				<div class="actbox">
+					<ul>
+						<li id="act-fav"><a href="/plus/stow.php?aid=2493" target="_blank">收藏</a></li>
+						<li id="act-err"><a href="/plus/erraddsave.php?aid=2493&title=CentOS最常用命令及快捷键整理" target="_blank">举报</a></li>
+						<li id="act-pus"><a href="/plus/recommend.php?aid=2493" target="_blank">推荐</a></li>
+						<li id="act-pnt"><a href="#" onClick="window.print();">打印</a></li>
+					</ul>
+				</div><!-- /actbox -->
+			</div><!-- /handle -->
+		</div><!-- /viewbox -->
+
+<!-- //AJAX评论区 -->
+<!-- //主模板必须要引入/include/dedeajax2.js -->
+<a name='postform'></a>
+<div class="mt1">
+		<dl class="tbox">
+			<dt>
+				<strong>发表评论</strong>
+				<span class="more"></span>
+			</dt>
+			<dd>
+				<div class="dede_comment_post">
+          <form action="#" method="post" name="feedback">
+          <input type="hidden" name="dopost" value="send" />
+          <input type="hidden" name="comtype" value="comments">
+          <input type="hidden" name="aid" value="2493" />
+          <input type="hidden" name="fid" id='feedbackfid' value="0" />
+          <div class="dcmp-title">
+						<small>为了和诣的生活，我关闭了评论页面，请大家到QQ群里交流吧：348944156,也欢迎关注本站微信公众号：centoscn </small>
+					
+				
+			</dd>
+		</dl>
+	</div><!-- //评论表单区结束 -->
+
+
+
+</div><!-- //左边内容结束 -->
+
+<!-- //右边内容开始 -->
+<div class="pright">
+ 		
+
+<div class="commend mt1"><dl class="tbox light">
+				<dt class='light'><strong>栏目分类</strong></dt>
+				<dd class='light'>
+					<ul class="c1 ico2">
+             <ul >
+                    
+                    <li><a href='/CentOS/help/' target="_blank">基础命令<span></span></a></li>
+                     
+                    <li><a href='/CentOS/config/' target="_blank">系统配置<span></span></a></li>
+                     
+                    <li><a href='/CentOS/Intermediate/' target="_blank">中级进介<span></span></a></li>
+                     </ul>					</ul>
+				</dd>
+			</dl>
+		</div><!-- /commend -->
+
+		<div class="commend mt1"><dl class="tbox light">
+				<dt class='light'><strong>本月热点</strong></dt>
+				<dd class='light'>
+					<ul class="c1 ico2">
+             <li><a href="/CentOS/help/2013/0725/558.html">Centos查看端口占用情况和开启端</a></li>
+<li><a href="/CentOS/help/2013/0725/597.html">Centos 建立一个新用户 详细讲解</a></li>
+<li><a href="/CentOS/help/2014/0306/2493.html">CentOS最常用命令及快捷键整理</a></li>
+<li><a href="/CentOS/help/2013/0725/496.html">centos tar压缩与解压缩命令大全</a></li>
+<li><a href="/CentOS/help/2013/0826/1448.html">CentOS中zip压缩和unzip解压缩命</a></li>
+<li><a href="/CentOS/help/2015/0208/4667.html">CentOS 7 firewalld使用简介</a></li>
+<li><a href="/CentOS/help/2014/1030/4025.html">定时任务 Crontab命令 详解</a></li>
+<li><a href="/CentOS/help/2015/0311/4853.html">查看centos系统版本命令</a></li>
+<li><a href="/CentOS/help/2013/0803/914.html">Centos下载文件wget命令详解</a></li>
+<li><a href="/CentOS/help/2014/0624/3173.html">CentOS中由一般用户切换为root用</a></li>
+
+					</ul>
+				</dd>
+			</dl>
+		</div><!-- /commend -->
+
+		<div class="hot mt1">
+			<dl class="tbox light">
+
+
+				<dt class='light'><strong>推荐内容</strong></dt>
+				<dd class='light'>
+					<ul class="d4">
+           <li><a href="/CentOS/help/2016/0429/7147.html">CentOS7 (精简操作指令)</a>
+            	<p>...</p>
+            </li>
+<li><a href="/CentOS/help/2015/1030/6358.html">CentOS系统管理相关命令</a>
+            	<p>...</p>
+            </li>
+<li><a href="/CentOS/help/2015/0712/5843.html">Linux常用命令大全</a>
+            	<p>...</p>
+            </li>
+<li><a href="/CentOS/help/2015/0705/5803.html">CentOS如何查看硬盘品牌型号等具体信息</a>
+            	<p>...</p>
+            </li>
+<li><a href="/CentOS/help/2015/0705/5799.html">CentOS只查看文件夹的几种方法</a>
+            	<p>...</p>
+            </li>
+
+					</ul>
+				</dd>
+			</dl>
+		</div></div></div>
+<!-- //二级子类下拉菜单，考虑SEO原因放置于底部  -->
+
+<!-- //底部模板 -->
+
+<div class="footer w960 center mt1 clear">
+
+<a target="_blank" href="about.html">关于我们</a> -
+
+<a target="_blank" href="about.html">联系我们</a> -
+
+<a target="_blank" href="about.html">广告服务</a> -<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F65a70808534a9fe419a0a120e9bef073' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<a target="_blank" href="about.html">免责申明</a> -
+
+<a target="_blank" href="about.html">版权申明</a> -
+
+<a target="_blank" href="about.html">TAG标签</a> -
+
+<a target="_blank" href="about.html">网站地图</a> -
+
+<a href="#top">返回顶部</a> </p>
+
+<!-- /powered -->
+
+	<p class="copyright">
+
+		Copyright 2012-2013(CentOS中文网) CentOScn.Com <a target="_blank" href="http://www.miibeian.gov.cn/">粤ICP备16045568号-1</a> Powered by DedeCMS 1.0 
+
+  </p>
+
+ </TR>
+<script type="text/javascript">
+/*120*270*/
+var cpro_id = "u1486028";
+</script>
+<script src="http://cpro.baidustatic.com/cpro/ui/f.js" type="text/javascript"></script></div>
+
+<!-- /footer -->
+</body></html>
