@@ -1,0 +1,2 @@
+1.选中修改的代码，右键- copy to executable  - selection
+
