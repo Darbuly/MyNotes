@@ -1,0 +1,173 @@
+//定义列
+.make-grid-columns() {
+  //声明调用
+  .col(@index) {  //不是递归
+    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+    .col((@index + 1), @item);
+    //.col(2,".col-xs-1, .col-sm-1, .col-md-1, .col-lg-1")   //index=1
+    //
+  }
+  .col(@index, @list) when (@index =< @grid-columns) { //小于等于栅格列数grid-columns:12; 递归函数
+    @item: ~".col-xs-@{index}, .col-sm-@{index}, .col-md-@{index}, .col-lg-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+    //递归
+    //col(3,".col-xs-1, .col-sm-1, .col-md-1, .col-lg-1,
+    //       .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2")
+    //...
+    //col(13,".col-xs-1, .col-sm-1, .col-md-1, .col-lg-1
+    //        .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2
+    //        ...
+    //        .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12")
+  }
+  .col(@index, @list) when (@index > @grid-columns) { //大于12列-递归出口
+    @{list} {
+      position: relative;
+      min-height: 1px;
+      padding-left:  ceil((@grid-gutter-width / 2));
+      padding-right: floor((@grid-gutter-width / 2));
+    }
+    //最终形成一个可以调用的css样式规则
+    //.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1
+    //.col-xs-2, .col-sm-2, .col-md-2, .col-lg-2
+    //        ...
+    //.col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
+    //  position:relative;
+    //  min-height:1px;
+    //  padding-left:15px;
+    //  padding-right:15px;       
+    //}
+  }
+
+  //开始调用
+  .col(1); 
+}
+
+
+//===============================================================================
+.float-grid-columns(@class) {
+  .col(@index) { // initial
+    @item: ~".col-@{class}-@{index}";
+    .col((@index + 1), @item);
+  }
+  .col(@index, @list) when (@index =< @grid-columns) { // general
+    @item: ~".col-@{class}-@{index}";
+    .col((@index + 1), ~"@{list}, @{item}");
+  }
+  .col(@index, @list) when (@index > @grid-columns) { // terminal
+    @{list} {
+      float: left;
+    }
+    //最终形成
+    //.col-xs-1, .col-xs-2, ... ,.col-xs-12 {
+    //  float:left;
+    //]}
+  }
+  .col(1); 
+}
+
+.calc-grid-column(@index, @class, @type) when (@type = width) and (@index > 0) {
+  .col-@{class}-@{index} {
+    width: percentage((@index / @grid-columns));
+  }
+  //.col-xs-12{
+  //    width:100%;
+  //}
+}
+.calc-grid-column(@index, @class, @type) when (@type = push) and (@index > 0) {
+  .col-@{class}-push-@{index} {
+    left: percentage((@index / @grid-columns));
+    //
+    //.col-xs-push-12{
+    //  left:12/12;
+    //}
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = push) and (@index = 0) {
+  .col-@{class}-push-0 {
+    left: auto;
+    //
+    //.col-xs-push-0{
+    //  left:auto;
+    //}
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index > 0) {
+  .col-@{class}-pull-@{index} {
+    right: percentage((@index / @grid-columns));
+    //
+    //.col-xs-pull-12{
+    //  right:12/12;
+    //}
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = pull) and (@index = 0) {
+  .col-@{class}-pull-0 {
+    right: auto;
+    //
+    //.col-xs-pull-0{
+    //  right:auto;
+    //}
+  }
+}
+.calc-grid-column(@index, @class, @type) when (@type = offset) {
+  .col-@{class}-offset-@{index} {
+    margin-left: percentage((@index / @grid-columns));
+  }
+  //.col-xs-offset-12 {
+  //  margin-left:12/12;
+  //}
+  //
+}
+
+
+
+
+//==============================================================================
+//基于less的递归生成器
+.loop-grid-columns(@index, @class, @type) when (@index >= 0) {
+  .calc-grid-column(@index, @class, @type);//计算列样式
+  //.calc-grid-column(12,xs,width)--->
+                            //.col-xs-12{
+                            //    width:100%;
+                            //}
+  .loop-grid-columns((@index - 1), @class, @type);//下一个迭代
+  //.loop-grid-columns(11,xs,width)---->
+  //.calc-grid-column(11,xs,width)---->
+                            //.col-xs-11{
+                            //    width:11/12;
+                            //}
+}
+
+
+//列-创造列
+.make-grid(@class) {//class=媒体查询，从 xs->sm,md,lg
+  .float-grid-columns(@class);
+  .loop-grid-columns(@grid-columns, @class, width);
+    //最终形成：
+    //.col-xs-12{width:100%;}
+    //.col-xs-11{width:11/12;}
+    //.col-xs-10{width:10/12;}
+    // ...
+    //.col-xs-1{width:1/12;}
+  .loop-grid-columns(@grid-columns, @class, pull);
+    //最终形成：
+    //.col-xs-pull-12{right:12/12;}
+    //.col-xs-pull-11{right:11/12;}
+    //.col-xs-pull-10{right:10/12;}
+    // ...
+    //.col-xs-pull-0{tight:auto;}
+  .loop-grid-columns(@grid-columns, @class, push);
+    //最终形成：
+    //.col-xs-push-12{left:12/12;}
+    //.col-xs-push-11{left:11/12;}
+    //.col-xs-push-10{left:10/12;}
+    // ...
+    //.col-xs-push-0{left:auto;}
+  .loop-grid-columns(@grid-columns, @class, offset);
+    //最终形成：
+    //.col-xs-offset-12{margin-left:12/12;}
+    //.col-xs-offset-11{margin-left:11/12;}
+    //.col-xs-offset-10{margin-left:10/12;}
+    // ...
+    //.col-xs-offset-0{margin-left:auto;}
+}

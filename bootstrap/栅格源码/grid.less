@@ -1,0 +1,39 @@
+// Container widths
+// 固定容器
+.container {
+  .container-fixed(); //这个混合，在固定容器和流体容器中都会调用到
+
+  @media (min-width: @screen-sm-min) { //@screen-sm-min:769px;
+    width: @container-sm;       //720px+槽宽30px=750px
+  }
+  @media (min-width: @screen-md-min) {  //@screen-md-min:992px;
+    width: @container-md;       //940px+槽宽30px=970px
+  }
+  @media (min-width: @screen-lg-min) {  //@screen-sm-min:1200px;
+    width: @container-lg;       //1140px+槽宽30px=1170px
+                              //注意！   顺序不能换，因为这里利用下面覆盖上面的机制来一步一步查询替换
+  }
+}
+// Fluid container
+// 流体容器
+.container-fluid {
+  .container-fixed();
+}
+// Row
+// 行
+.row {
+  .make-row();
+}
+// Columns
+// 列
+.make-grid-columns();
+.make-grid(xs);    //手机：768px;
+@media (min-width: @screen-sm-min) {
+  .make-grid(sm);   //平板：768px
+}
+@media (min-width: @screen-md-min) {
+  .make-grid(md);   //中屏PC:992px
+}
+@media (min-width: @screen-lg-min) {
+  .make-grid(lg);   //大屏PC:1200px
+}

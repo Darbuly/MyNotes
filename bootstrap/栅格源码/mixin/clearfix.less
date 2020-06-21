@@ -1,0 +1,11 @@
+//双伪元素清除浮动的less写法
+.clearfix() {
+  &:before,
+  &:after {
+    content: " "; // 1
+    display: table; // 2
+  }
+  &:after {
+    clear: both;
+  }
+}

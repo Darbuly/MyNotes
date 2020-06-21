@@ -1,0 +1,1765 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head>  
+        <script type="text/javascript" src="http://static.blog.csdn.net/scripts/tingyun-rum.js"></script>
+            <link rel="canonical" href="http://blog.csdn.net/xiangjai/article/details/9012387"/> 
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848"> 
+       
+    <title>Android源码目录结构详解 - xiangjai的专栏
+        - CSDN博客</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="在学习Android的过程中，学习写应用还好，一开始不用管太多代码，直接调用函数就可以了，但是工作中却需要修改到framework之类的东东所以感觉开始纠结了，又是初学，很多不懂，所以就去找了关于源代码结构介绍的，感觉有很大帮助，所以转载过来分享Android 4.0|-- Makefile|-- bionic （bionic C库）|-- bootable" />
+
+    <meta name="keywords" content="android" />
+
+   
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+    
+        <!--new top-->
+                      <!--new top-->
+    
+      <!-- ad begin -->
+         
+    <!-- ad end-->
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/default/css/style.css?v=1.1" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/xiangjai/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+
+    <link href="http://c.csdnimg.cn/blog/csdn_public_blog_detail.min.css" type="text/css" rel="stylesheet" />
+     
+         <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+  
+
+
+    <!-- 请置于所有广告位代码之前 --> 
+            <script src="http://dup.baidustatic.com/js/ds.js"></script>
+
+</head>
+
+
+<body>
+     
+        <div class="tracking-ad" data-view="true" data-mod="ad_popu_72"  data-mtp="62" data-order="40" data-con="ad_content_2072" >
+                     <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+                <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	                <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 --><div id="cpro_u2895327"></div></div>
+                <script>  document.getElementById("popuLayer_js_q").onload = function () { var styObjd = styObj = { width: "300px", "height": parseInt(250) + 28 }; window.CSDN.Layer.PopuLayer("#layerd", { storageName: "layerd", styleObj: styObjd, total: 50, expoire: 1000 * 60 }); }</script><!-- 投放代码 --><script type="text/javascript">                    /*服务器频道首页置顶Banner960*90，创建于2014-7-3*/    (window.cproArray = window.cproArray || []).push({ id: "u2895327" });  </script>  <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script>
+     
+        </div>
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        <div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/xiangjai">xiangjai的专栏</a></h2>
+            <h3></h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/xiangjai?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/xiangjai?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/xiangjai/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "xiangjai";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/xiangjai";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/75257273">
+<font color=red><strong>程序员，为什么写不好一份简历？</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/74550215">
+<font color=blue><strong>征文 | 你会为 AI 转型么？</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+<a href="http://blog.csdn.net/soledadzz/article/details/75312484">
+<font color=red><strong>福利 | 免费参加 2017 OpenStack Days China</strong></font></a>
+
+
+</div>                        </div>
+
+                        
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+      var isBole = false; 
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=Android%e6%ba%90%e7%a0%81%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84%e8%af%a6%e8%a7%a3&u=http://blog.csdn.net/xiangjai/article/details/9012387"
+    </script>
+<div id="article_details" class="details">
+    <div class="article_title">   
+         <span class="ico ico_type_Repost"></span>
+
+    <h1>
+        <span class="link_title"><a href="/xiangjai/article/details/9012387">
+        Android源码目录结构详解        
+           
+        </a>
+        </span>
+
+         
+    </h1>
+</div>
+
+   
+
+        <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/android' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">android</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2013-06-03 12:41</span>
+            <span class="link_view" title="阅读次数">16225人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(0)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Android%e6%ba%90%e7%a0%81%e7%9b%ae%e5%bd%95%e7%bb%93%e6%9e%84%e8%af%a6%e8%a7%a3','9012387');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(9012387,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('1113327','xiangjai','top','9012387');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">android<em>（83）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/xiangjai/article/category/1113327"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_1113327">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+
+  
+
+  
+  
+     
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+
+<p style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px">
+在学习Android的过程中，学习写应用还好，一开始不用管太多代码，直接调用函数就可以了，但是工作中却需要修改到framework之类的东东</p>
+<p style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px">
+所以感觉开始纠结了，又是初学，很多不懂，所以就去找了关于源代码结构介绍的，感觉有很大帮助，所以转载过来分享</p>
+<p style="color:rgb(51,51,51); font-family:Arial; font-size:14px; line-height:26px">
+<br>
+</p>
+<h3 style="margin:0px; padding:0px; color:rgb(51,51,51); font-family:Arial; line-height:26px">
+<strong><span style="font-family:SimSun">Android 4.0<br>
+</span><span style="font-family:SimSun">|-- Makefile<br>
+</span><span style="font-family:SimSun">|-- bionic （bionic C库）<br>
+</span><span style="font-family:SimSun">|-- bootable （启动引导相关代码）<br>
+</span><span style="font-family:SimSun">|-- build （存放系统编译规则及generic等基础开发包配置）<br>
+</span><span style="font-family:SimSun">|-- cts （Android兼容性测试套件标准）<br>
+</span><span style="font-family:SimSun">|-- dalvik （dalvik JAVA虚拟机）<br>
+</span><span style="font-family:SimSun">|-- development （应用程序开发相关）<br>
+</span><span style="font-family:SimSun">|-- external （android使用的一些开源的模组）<br>
+</span><span style="font-family:SimSun">|-- frameworks （核心框架——java及C&#43;&#43;语言）<br>
+</span><span style="font-family:SimSun">|-- hardware （部分厂家开源的硬解适配层HAL代码）<br>
+</span><span style="font-family:SimSun">|-- out （编译完成后的代码输出与此目录）<br>
+</span><span style="font-family:SimSun">|-- packages （应用程序包）<br>
+</span><span style="font-family:SimSun">|-- prebuilt （x86和arm架构下预编译的一些资源）<br>
+</span><span style="font-family:SimSun">|-- sdk （sdk及模拟器）<br>
+</span><span style="font-family:SimSun">|-- system （底层文件系统库、应用及组件——C语言）<br>
+</span><span style="font-family:SimSun">`-- vendor （厂商定制代码）<br>
+</span><span style="font-family:SimSun">bionic 目录<br>
+</span><span style="font-family:SimSun">|-- libc （C库）<br>
+</span><span style="font-family:SimSun">| |-- arch-arm （ARM架构，包含系统调用汇编实现）<br>
+</span><span style="font-family:SimSun">| |-- arch-x86 （x86架构，包含系统调用汇编实现）<br>
+</span><span style="font-family:SimSun">| |-- bionic （由C实现的功能，架构无关）<br>
+</span><span style="font-family:SimSun">| |-- docs （文档）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| |-- inet （？inet相关，具体作用不明）<br>
+</span><span style="font-family:SimSun">| |-- kernel （Linux内核中的一些头文件）<br>
+</span><span style="font-family:SimSun">| |-- netbsd （？nesbsd系统相关，具体作用不明）<br>
+</span><span style="font-family:SimSun">| |-- private （？一些私有的头文件）<br>
+</span><span style="font-family:SimSun">| |-- stdio （stdio实现）<br>
+</span><span style="font-family:SimSun">| |-- stdlib （stdlib实现）<br>
+</span><span style="font-family:SimSun">| |-- string （string函数实现）<br>
+</span><span style="font-family:SimSun">| |-- tools （几个工具）<br>
+</span><span style="font-family:SimSun">| |-- tzcode （时区相关代码）<br>
+</span><span style="font-family:SimSun">| |-- unistd （unistd实现）<br>
+</span><span style="font-family:SimSun">| `-- zoneinfo （时区信息）<br>
+</span><span style="font-family:SimSun">|-- libdl （libdl实现，dl是动态链接，提供访问动态链接库的功能）<br>
+</span><span style="font-family:SimSun">|-- libm （libm数学库的实现，）<br>
+</span><span style="font-family:SimSun">| |-- alpha （apaha架构）<br>
+</span><span style="font-family:SimSun">| |-- amd64 （amd64架构）<br>
+</span><span style="font-family:SimSun">| |-- arm （arm架构）<br>
+</span><span style="font-family:SimSun">| |-- bsdsrc （？bsd的源码）<br>
+</span><span style="font-family:SimSun">| |-- i386 （i386架构）<br>
+</span><span style="font-family:SimSun">| |-- i387 （i387架构？）<br>
+</span><span style="font-family:SimSun">| |-- ia64 （ia64架构）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| |-- man （数学函数，后缀名为.3，一些为freeBSD的库文件）<br>
+</span><span style="font-family:SimSun">| |-- powerpc （powerpc架构）<br>
+</span><span style="font-family:SimSun">| |-- sparc64 （sparc64架构）<br>
+</span><span style="font-family:SimSun">| `-- src （源代码）<br>
+</span><span style="font-family:SimSun">|-- libstdc&#43;&#43; （libstdc&#43;&#43; C&#43;&#43;实现库）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| `-- src （源码）<br>
+</span><span style="font-family:SimSun">|-- libthread_db （多线程程序的调试器库）<br>
+</span><span style="font-family:SimSun">| `-- include （头文件）<br>
+</span><span style="font-family:SimSun">`-- linker （动态链接器）<br>
+</span><span style="font-family:SimSun">`-- arch （支持arm和x86两种架构）<br>
+</span><span style="font-family:SimSun">bootable 目录<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- bootloader （适合各种bootloader的通用代码）<br>
+</span><span style="font-family:SimSun">| `-- legacy （估计不能直接使用，可以参考）<br>
+</span><span style="font-family:SimSun">| |-- arch_armv6 （V6架构，几个简单的汇编文件）<br>
+</span><span style="font-family:SimSun">| |-- arch_msm7k （高通7k处理器架构的几个基本驱动）<br>
+</span><span style="font-family:SimSun">| |-- include （通用头文件和高通7k架构头文件）<br>
+</span><span style="font-family:SimSun">| |-- libboot （启动库，都写得很简单）<br>
+</span><span style="font-family:SimSun">| |-- libc （一些常用的c函数）<br>
+</span><span style="font-family:SimSun">| |-- nandwrite （nandwirte函数实现）<br>
+</span><span style="font-family:SimSun">| `-- usbloader （usbloader实现）<br>
+</span><span style="font-family:SimSun">|-- diskinstaller （android镜像打包器，x86可生产iso）<br>
+</span><span style="font-family:SimSun">`-- recovery （系统恢复相关）<br>
+</span><span style="font-family:SimSun">|-- edify （升级脚本使用的edify脚本语言）<br>
+</span><span style="font-family:SimSun">|-- etc （init.rc恢复脚本）<br>
+</span><span style="font-family:SimSun">|-- minui （一个简单的UI）<br>
+</span><span style="font-family:SimSun">|-- minzip （一个简单的压缩工具）<br>
+</span><span style="font-family:SimSun">|-- mtdutils （mtd工具）<br>
+</span><span style="font-family:SimSun">|-- res （资源）<br>
+</span><span style="font-family:SimSun">| `-- images （一些图片）<br>
+</span><span style="font-family:SimSun">|-- tools （工具）<br>
+</span><span style="font-family:SimSun">| `-- ota （OTA Over The Air Updates升级工具）<br>
+</span><span style="font-family:SimSun">`-- updater （升级器）<br>
+</span><span style="font-family:SimSun">build目录<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- core （核心编译规则）<br>
+</span><span style="font-family:SimSun">|-- history （历史记录）<br>
+</span><span style="font-family:SimSun">|-- libs&nbsp;<br>
+</span><span style="font-family:SimSun">| `-- host （主机端库，有android “cp”功能替换）<br>
+</span><span style="font-family:SimSun">|-- target （目标机编译对象）<br>
+</span><span style="font-family:SimSun">| |-- board （开发平台）<br>
+</span><span style="font-family:SimSun">| | |-- emulator （模拟器）<br>
+</span><span style="font-family:SimSun">| | |-- generic （通用）<br>
+</span><span style="font-family:SimSun">| | |-- idea6410 （自己添加的）<br>
+</span><span style="font-family:SimSun">| | `-- sim （最简单）<br>
+</span><span style="font-family:SimSun">| `-- product （开发平台对应的编译规则）<br>
+</span><span style="font-family:SimSun">| `-- security （密钥相关）<br>
+</span><span style="font-family:SimSun">`-- tools （编译中主机使用的工具及脚本）<br>
+</span><span style="font-family:SimSun">|-- acp （Android &quot;acp&quot; Command）<br>
+</span><span style="font-family:SimSun">|-- apicheck （api检查工具）<br>
+</span><span style="font-family:SimSun">|-- applypatch （补丁工具）<br>
+</span><span style="font-family:SimSun">|-- apriori （预链接工具）<br>
+</span><span style="font-family:SimSun">|-- atree （tree工具）<br>
+</span><span style="font-family:SimSun">|-- bin2asm （bin转换为asm工具）<br>
+</span><span style="font-family:SimSun">|-- check_prereq （检查编译时间戳工具）<br>
+</span><span style="font-family:SimSun">|-- dexpreopt （模拟器相关工具，具体功能不明）<br>
+</span><span style="font-family:SimSun">|-- droiddoc （？作用不明，java语言，网上有人说和JDK5有关）<br>
+</span><span style="font-family:SimSun">|-- fs_config （This program takes a list of files and directories）<br>
+</span><span style="font-family:SimSun">|-- fs_get_stats （获取文件系统状态）<br>
+</span><span style="font-family:SimSun">|-- iself （判断是否ELF&#26684;式）<br>
+</span><span style="font-family:SimSun">|-- isprelinked （判断是否prelinked）<br>
+</span><span style="font-family:SimSun">|-- kcm （按键相关）<br>
+</span><span style="font-family:SimSun">|-- lsd （List symbol dependencies）<br>
+</span><span style="font-family:SimSun">|-- releasetools （生成镜像的工具及脚本）<br>
+</span><span style="font-family:SimSun">|-- rgb2565 （rgb转换为565）<br>
+</span><span style="font-family:SimSun">|-- signapk （apk签名工具）<br>
+</span><span style="font-family:SimSun">|-- soslim （strip工具）<br>
+</span><span style="font-family:SimSun">`-- zipalign （zip archive alignment tool）<br>
+</span><span style="font-family:SimSun">dalvik目录 dalvik虚拟机<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- dalvikvm （main.c的目录）<br>
+</span><span style="font-family:SimSun">|-- dexdump （dex反汇编）<br>
+</span><span style="font-family:SimSun">|-- dexlist （List all methods in all concrete classes in a DEX file.）<br>
+</span><span style="font-family:SimSun">|-- dexopt （预验证与优化）<br>
+</span><span style="font-family:SimSun">|-- docs （文档）<br>
+</span><span style="font-family:SimSun">|-- dvz （和zygote相关的一个命令）<br>
+</span><span style="font-family:SimSun">|-- dx （dx工具，将多个java转换为dex）<br>
+</span><span style="font-family:SimSun">|-- hit （？java语言写成）<br>
+</span><span style="font-family:SimSun">|-- libcore （核心库）<br>
+</span><span style="font-family:SimSun">|-- libcore-disabled （？禁用的库）<br>
+</span><span style="font-family:SimSun">|-- libdex （dex的库）<br>
+</span><span style="font-family:SimSun">|-- libnativehelper （Support functions for Android's class libraries）<br>
+</span><span style="font-family:SimSun">|-- tests （测试代码）<br>
+</span><span style="font-family:SimSun">|-- tools （工具）<br>
+</span><span style="font-family:SimSun">`-- vm （虚拟机实现）<br>
+</span><span style="font-family:SimSun">development 目录 （开发者需要的一些例程及工具）<br>
+</span><span style="font-family:SimSun">|-- apps （一些核心应用程序）<br>
+</span><span style="font-family:SimSun">| |-- BluetoothDebug （蓝牙调试程序）<br>
+</span><span style="font-family:SimSun">| |-- CustomLocale （自定义区域设置）<br>
+</span><span style="font-family:SimSun">| |-- Development （开发）<br>
+</span><span style="font-family:SimSun">| |-- Fallback （和语言相关的一个程序）<br>
+</span><span style="font-family:SimSun">| |-- FontLab （字库）<br>
+</span><span style="font-family:SimSun">| |-- GestureBuilder （手势动作）<br>
+</span><span style="font-family:SimSun">| |-- NinePatchLab （？）<br>
+</span><span style="font-family:SimSun">| |-- OBJViewer （OBJ查看器）<br>
+</span><span style="font-family:SimSun">| |-- SdkSetup （SDK安装器）<br>
+</span><span style="font-family:SimSun">| |-- SpareParts （高级设置）<br>
+</span><span style="font-family:SimSun">| |-- Term （远程登录）<br>
+</span><span style="font-family:SimSun">| `-- launchperf （？）<br>
+</span><span style="font-family:SimSun">|-- build （编译脚本模板）<br>
+</span><span style="font-family:SimSun">|-- cmds （有个monkey工具）<br>
+</span><span style="font-family:SimSun">|-- data （配置数据）<br>
+</span><span style="font-family:SimSun">|-- docs （文档）<br>
+</span><span style="font-family:SimSun">|-- host （主机端USB驱动等）<br>
+</span><span style="font-family:SimSun">|-- ide （集成开发环境）<br>
+</span><span style="font-family:SimSun">|-- ndk （本地开发套件——c语言开发套件）<br>
+</span><span style="font-family:SimSun">|-- pdk （Plug Development Kit）<br>
+</span><span style="font-family:SimSun">|-- samples （例程）<br>
+</span><span style="font-family:SimSun">| |-- AliasActivity （？）<br>
+</span><span style="font-family:SimSun">| |-- ApiDemos （API演示程序）<br>
+</span><span style="font-family:SimSun">| |-- BluetoothChat （蓝牙聊天）<br>
+</span><span style="font-family:SimSun">| |-- BrowserPlugin （浏览器插件）<br>
+</span><span style="font-family:SimSun">| |-- BusinessCard （商业卡）<br>
+</span><span style="font-family:SimSun">| |-- Compass （指南针）<br>
+</span><span style="font-family:SimSun">| |-- ContactManager （联系人管理器）<br>
+</span><span style="font-family:SimSun">| |-- CubeLiveWallpaper （动态壁纸的一个简单例程）<br>
+</span><span style="font-family:SimSun">| |-- FixedGridLayout （像是布局）<br>
+</span><span style="font-family:SimSun">| |-- GlobalTime （全球时间）<br>
+</span><span style="font-family:SimSun">| |-- HelloActivity （Hello）<br>
+</span><span style="font-family:SimSun">| |-- Home （Home）<br>
+</span><span style="font-family:SimSun">| |-- JetBoy （jetBoy游戏）<br>
+</span><span style="font-family:SimSun">| |-- LunarLander （貌&#20284;又是一个游戏）<br>
+</span><span style="font-family:SimSun">| |-- MailSync （邮件同步）<br>
+</span><span style="font-family:SimSun">| |-- MultiResolution （多分辨率）<br>
+</span><span style="font-family:SimSun">| |-- MySampleRss （RSS）<br>
+</span><span style="font-family:SimSun">| |-- NotePad （记事本）<br>
+</span><span style="font-family:SimSun">| |-- RSSReader （RSS阅读器）<br>
+</span><span style="font-family:SimSun">| |-- SearchableDictionary （目录搜索）<br>
+</span><span style="font-family:SimSun">| |-- SimpleJNI （JNI例程）<br>
+</span><span style="font-family:SimSun">| |-- SkeletonApp （空壳APP）<br>
+</span><span style="font-family:SimSun">| |-- Snake （snake程序）<br>
+</span><span style="font-family:SimSun">| |-- SoftKeyboard （软键盘）<br>
+</span><span style="font-family:SimSun">| |-- Wiktionary （？维基）<br>
+</span><span style="font-family:SimSun">| `-- WiktionarySimple（？维基例程）<br>
+</span><span style="font-family:SimSun">|-- scripts （脚本）<br>
+</span><span style="font-family:SimSun">|-- sdk （sdk配置）<br>
+</span><span style="font-family:SimSun">|-- simulator （？模拟器）<br>
+</span><span style="font-family:SimSun">|-- testrunner （？测试用）<br>
+</span><span style="font-family:SimSun">`-- tools （一些工具）<br>
+</span><span style="font-family:SimSun">external 目录<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- aes （AES加密）<br>
+</span><span style="font-family:SimSun">|-- apache-http （网页服务器）<br>
+</span><span style="font-family:SimSun">|-- astl （ASTL (Android STL) is a slimmed-down version of the regular C&#43;&#43; STL.）<br>
+</span><span style="font-family:SimSun">|-- bison （自动生成语法分析器，将无关文法转换成C、C&#43;&#43;）<br>
+</span><span style="font-family:SimSun">|-- blktrace （blktrace is a block layer IO tracing mechanism）<br>
+</span><span style="font-family:SimSun">|-- bluetooth （蓝牙相关、协议栈）<br>
+</span><span style="font-family:SimSun">|-- bsdiff （diff工具）<br>
+</span><span style="font-family:SimSun">|-- bzip2 （压缩工具）<br>
+</span><span style="font-family:SimSun">|-- clearsilver （html模板系统）<br>
+</span><span style="font-family:SimSun">|-- dbus （低延时、低开销、高可用性的IPC机制）<br>
+</span><span style="font-family:SimSun">|-- dhcpcd （DHCP服务）<br>
+</span><span style="font-family:SimSun">|-- dosfstools （DOS文件系统工具）<br>
+</span><span style="font-family:SimSun">|-- dropbear （SSH2的server）<br>
+</span><span style="font-family:SimSun">|-- e2fsprogs （EXT2文件系统工具）<br>
+</span><span style="font-family:SimSun">|-- elfcopy （复制ELF的工具）<br>
+</span><span style="font-family:SimSun">|-- elfutils （ELF工具）<br>
+</span><span style="font-family:SimSun">|-- embunit （Embedded Unit Project）<br>
+</span><span style="font-family:SimSun">|-- emma （java代码覆盖率统计工具）<br>
+</span><span style="font-family:SimSun">|-- esd （Enlightened Sound Daemon，将多种音频流混合在一个设备上播放）<br>
+</span><span style="font-family:SimSun">|-- expat （Expat is a stream-oriented XML parser.）<br>
+</span><span style="font-family:SimSun">|-- fdlibm （FDLIBM (Freely Distributable LIBM)）<br>
+</span><span style="font-family:SimSun">|-- freetype （字体）<br>
+</span><span style="font-family:SimSun">|-- fsck_msdos （dos文件系统检查工具）<br>
+</span><span style="font-family:SimSun">|-- gdata （google的无线数据相关）<br>
+</span><span style="font-family:SimSun">|-- genext2fs （genext2fs generates an ext2 filesystem as a normal (non-root) user）<br>
+</span><span style="font-family:SimSun">|-- giflib （gif库）<br>
+</span><span style="font-family:SimSun">|-- googleclient （google用户库）<br>
+</span><span style="font-family:SimSun">|-- grub （This is GNU GRUB, the GRand Unified Bootloader.）<br>
+</span><span style="font-family:SimSun">|-- gtest （Google C&#43;&#43; Testing Framework）<br>
+</span><span style="font-family:SimSun">|-- icu4c （ICU(International Component for Unicode)在C/C&#43;&#43;下的版本）<br>
+</span><span style="font-family:SimSun">|-- ipsec-tools （This package provides a way to use the native IPsec functionality ）<br>
+</span><span style="font-family:SimSun">|-- iptables （防火墙）<br>
+</span><span style="font-family:SimSun">|-- jdiff （generate a report describing the difference between two public Java APIs.）<br>
+</span><span style="font-family:SimSun">|-- jhead （jpeg头部信息工具）<br>
+</span><span style="font-family:SimSun">|-- jpeg （jpeg库）<br>
+</span><span style="font-family:SimSun">|-- junit （JUnit是一个Java语言的单元测试框架）<br>
+</span><span style="font-family:SimSun">|-- kernel-headers （内核的一些头文件）<br>
+</span><span style="font-family:SimSun">|-- libffi （libffi is a foreign function interface library.）<br>
+</span><span style="font-family:SimSun">|-- libpcap （网络数据包捕获函数）<br>
+</span><span style="font-family:SimSun">|-- libpng （png库）<br>
+</span><span style="font-family:SimSun">|-- libxml2 （xml解析库）<br>
+</span><span style="font-family:SimSun">|-- mtpd （一个命令）<br>
+</span><span style="font-family:SimSun">|-- netcat （simple Unix utility which reads and writes dataacross network connections）<br>
+</span><span style="font-family:SimSun">|-- netperf （网络性能测量工具）<br>
+</span><span style="font-family:SimSun">|-- neven （看代码和JNI相关）<br>
+</span><span style="font-family:SimSun">|-- opencore （多媒体框架）<br>
+</span><span style="font-family:SimSun">|-- openssl （SSL加密相关）<br>
+</span><span style="font-family:SimSun">|-- openvpn （VPN开源库）<br>
+</span><span style="font-family:SimSun">|-- oprofile （OProfile是Linux内核支持的一种性能分析机制。）<br>
+</span><span style="font-family:SimSun">|-- ping （ping命令）<br>
+</span><span style="font-family:SimSun">|-- ppp （pppd拨号命令，好像还没有chat）<br>
+</span><span style="font-family:SimSun">|-- proguard （Java class file shrinker, optimizer, obfuscator, and preverifier）<br>
+</span><span style="font-family:SimSun">|-- protobuf （a flexible, efficient, automated mechanism for serializing structured data）<br>
+</span><span style="font-family:SimSun">|-- qemu （arm模拟器）<br>
+</span><span style="font-family:SimSun">|-- safe-iop （functions for performing safe integer operations ）<br>
+</span><span style="font-family:SimSun">|-- skia （skia图形引擎）<br>
+</span><span style="font-family:SimSun">|-- sonivox （sole MIDI solution for Google Android Mobile Phone Platform）<br>
+</span><span style="font-family:SimSun">|-- speex （Speex编/解码API的使用(libspeex)）<br>
+</span><span style="font-family:SimSun">|-- sqlite （数据库）<br>
+</span><span style="font-family:SimSun">|-- srec （Nuance 公司提供的开源连续非特定人语音识别）<br>
+</span><span style="font-family:SimSun">|-- strace （trace工具）<br>
+</span><span style="font-family:SimSun">|-- svox （Embedded Text-to-Speech）<br>
+</span><span style="font-family:SimSun">|-- tagsoup （TagSoup是一个Java开发符合SAX的HTML解析器）<br>
+</span><span style="font-family:SimSun">|-- tcpdump （抓TCP包的软件）<br>
+</span><span style="font-family:SimSun">|-- tesseract （Tesseract Open Source OCR Engine.）<br>
+</span><span style="font-family:SimSun">|-- tinyxml （TinyXml is a simple, small, C&#43;&#43; XML parser）<br>
+</span><span style="font-family:SimSun">|-- tremor （I stream and file decoder provides an embeddable,integer-only library）<br>
+</span><span style="font-family:SimSun">|-- webkit （浏览器核心）<br>
+</span><span style="font-family:SimSun">|-- wpa_supplicant （无线网卡管理）<br>
+</span><span style="font-family:SimSun">|-- xmlwriter （XML 编辑工具）<br>
+</span><span style="font-family:SimSun">|-- yaffs2 （yaffs文件系统）<br>
+</span><span style="font-family:SimSun">`-- zlib （a general purpose data compression library）<br>
+</span><span style="font-family:SimSun">frameworks 目录 （核心框架——java及C&#43;&#43;语言）<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- base （基本内容）<br>
+</span><span style="font-family:SimSun">| |-- api （？都是xml文件，定义了java的api？）<br>
+</span><span style="font-family:SimSun">| |-- awt （AWT库）<br>
+</span><span style="font-family:SimSun">| |-- build （空的）<br>
+</span><span style="font-family:SimSun">| |-- camera （摄像头服务程序库）<br>
+</span><span style="font-family:SimSun">| |-- cmds （重要命令：am、app_proce等）<br>
+</span><span style="font-family:SimSun">| |-- core （核心库）<br>
+</span><span style="font-family:SimSun">| |-- data （字体和声音等数据文件）<br>
+</span><span style="font-family:SimSun">| |-- docs （文档）<br>
+</span><span style="font-family:SimSun">| |-- graphics （图形相关）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| |-- keystore （和数据签名证书相关）<br>
+</span><span style="font-family:SimSun">| |-- libs （库）<br>
+</span><span style="font-family:SimSun">| |-- location （地区库）<br>
+</span><span style="font-family:SimSun">| |-- media （媒体相关库）<br>
+</span><span style="font-family:SimSun">| |-- obex （蓝牙传输库）<br>
+</span><span style="font-family:SimSun">| |-- opengl （2D-3D加速库）<br>
+</span><span style="font-family:SimSun">| |-- packages （设置、TTS、VPN程序）<br>
+</span><span style="font-family:SimSun">| |-- sax （XML解析器）<br>
+</span><span style="font-family:SimSun">| |-- services （各种服务程序）<br>
+</span><span style="font-family:SimSun">| |-- telephony （电话通讯管理）<br>
+</span><span style="font-family:SimSun">| |-- test-runner （测试工具相关）<br>
+</span><span style="font-family:SimSun">| |-- tests （各种测试）<br>
+</span><span style="font-family:SimSun">| |-- tools （一些叫不上名的工具）<br>
+</span><span style="font-family:SimSun">| |-- vpn （VPN）<br>
+</span><span style="font-family:SimSun">| `-- wifi （无线网络）<br>
+</span><span style="font-family:SimSun">|-- opt （可选部分）<br>
+</span><span style="font-family:SimSun">| |-- com.google.android （有个framework.jar）<br>
+</span><span style="font-family:SimSun">| |-- com.google.android.googlelogin （有个client.jar）<br>
+</span><span style="font-family:SimSun">| `-- emoji （standard message elements）<br>
+</span><span style="font-family:SimSun">`-- policies （Product policies are operating system directions aimed at specific uses）<br>
+</span><span style="font-family:SimSun">`-- base&nbsp;<br>
+</span><span style="font-family:SimSun">|-- mid （MID设备）<br>
+</span><span style="font-family:SimSun">`-- phone （手机类设备，一般用这个）<br>
+</span><span style="font-family:SimSun">hardware 目录 （部分厂家开源的硬解适配层HAL代码）<br>
+</span><span style="font-family:SimSun">|-- broadcom （博通公司）<br>
+</span><span style="font-family:SimSun">| `-- wlan （无线网卡）<br>
+</span><span style="font-family:SimSun">|-- libhardware （硬件库）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| `-- modules （Default (and possibly architecture dependents) HAL modules）<br>
+</span><span style="font-family:SimSun">| |-- gralloc （gralloc显示相关）<br>
+</span><span style="font-family:SimSun">| `-- overlay （Skeleton for the &quot;overlay&quot; HAL module.）<br>
+</span><span style="font-family:SimSun">|-- libhardware_legacy （旧的硬件库）<br>
+</span><span style="font-family:SimSun">| |-- flashlight （背光）<br>
+</span><span style="font-family:SimSun">| |-- gps （GPS）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| |-- mount （旧的挂载器）<br>
+</span><span style="font-family:SimSun">| |-- power （电源）<br>
+</span><span style="font-family:SimSun">| |-- qemu （模拟器）<br>
+</span><span style="font-family:SimSun">| |-- qemu_tracing （模拟器跟踪）<br>
+</span><span style="font-family:SimSun">| |-- tests （测试）<br>
+</span><span style="font-family:SimSun">| |-- uevent （uevent）<br>
+</span><span style="font-family:SimSun">| |-- vibrator （震动）<br>
+</span><span style="font-family:SimSun">| `-- wifi （无线）<br>
+</span><span style="font-family:SimSun">|-- msm7k （高通7k处理器开源抽象层）<br>
+</span><span style="font-family:SimSun">| |-- boot （启动）<br>
+</span><span style="font-family:SimSun">| |-- libaudio （声音库）<br>
+</span><span style="font-family:SimSun">| |-- libaudio-qsd8k （qsd8k的声音相关库）<br>
+</span><span style="font-family:SimSun">| |-- libcamera （摄像头库）<br>
+</span><span style="font-family:SimSun">| |-- libcopybit （copybit库）<br>
+</span><span style="font-family:SimSun">| |-- libgralloc （gralloc库）<br>
+</span><span style="font-family:SimSun">| |-- libgralloc-qsd8k （qsd8k的gralloc库）<br>
+</span><span style="font-family:SimSun">| |-- liblights （背光库）<br>
+</span><span style="font-family:SimSun">| `-- librpc （RPC库）<br>
+</span><span style="font-family:SimSun">|-- ril （无线电抽象层）<br>
+</span><span style="font-family:SimSun">| |-- include （头文件）<br>
+</span><span style="font-family:SimSun">| |-- libril （库）<br>
+</span><span style="font-family:SimSun">| |-- reference-cdma-sms （cdma短信参考）<br>
+</span><span style="font-family:SimSun">| |-- reference-ril （ril参考）<br>
+</span><span style="font-family:SimSun">| `-- rild （ril后台服务程序）<br>
+</span><span style="font-family:SimSun">`-- ti （ti公司开源HAL）<br>
+</span><span style="font-family:SimSun">|-- omap3 （omap3处理器）<br>
+</span><span style="font-family:SimSun">| |-- dspbridge （DSP桥）<br>
+</span><span style="font-family:SimSun">| |-- libopencorehw （opencore硬件库）<br>
+</span><span style="font-family:SimSun">| |-- liboverlay （overlay硬件库）<br>
+</span><span style="font-family:SimSun">| |-- libstagefrighthw （stagefright硬件库）<br>
+</span><span style="font-family:SimSun">| `-- omx （omx组件）<br>
+</span><span style="font-family:SimSun">`-- wlan （无线网卡）<br>
+</span><span style="font-family:SimSun">packages 目录<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- apps （应用程序库）<br>
+</span><span style="font-family:SimSun">| |-- AlarmClock （闹钟）<br>
+</span><span style="font-family:SimSun">| |-- Bluetooth （蓝牙）<br>
+</span><span style="font-family:SimSun">| |-- Browser （浏览器）<br>
+</span><span style="font-family:SimSun">| |-- Calculator （计算器）<br>
+</span><span style="font-family:SimSun">| |-- Calendar （日历）<br>
+</span><span style="font-family:SimSun">| |-- Camera （相机）<br>
+</span><span style="font-family:SimSun">| |-- CertInstaller （在Android中安装数字签名，被调用）<br>
+</span><span style="font-family:SimSun">| |-- Contacts （拨号(调用)、联系人、通话记录）<br>
+</span><span style="font-family:SimSun">| |-- DeskClock （桌面时钟）<br>
+</span><span style="font-family:SimSun">| |-- Email （Email）<br>
+</span><span style="font-family:SimSun">| |-- Gallery （相册，和Camera类&#20284;，多了列表）<br>
+</span><span style="font-family:SimSun">| |-- Gallery3D （？3D相册）<br>
+</span><span style="font-family:SimSun">| |-- GlobalSearch （为google搜索服务，提供底层应用）<br>
+</span><span style="font-family:SimSun">| |-- GoogleSearch （google搜索）<br>
+</span><span style="font-family:SimSun">| |-- HTMLViewer （浏览器附属界面，被浏览器应用调用，同时提供存储记录功能）<br>
+</span><span style="font-family:SimSun">| |-- IM （即时通讯，为手机提供信号发送、接收、通信的服务）<br>
+</span><span style="font-family:SimSun">| |-- Launcher （登陆启动项，显示图片框架等等图形界面）<br>
+</span><span style="font-family:SimSun">| |-- Launcher2 （登陆启动项，负责应用的调用）<br>
+</span><span style="font-family:SimSun">| |-- Mms （？彩信业务）<br>
+</span><span style="font-family:SimSun">| |-- Music （音乐播放器）<br>
+</span><span style="font-family:SimSun">| |-- PackageInstaller （安装、卸载程序的响应）<br>
+</span><span style="font-family:SimSun">| |-- Phone （电话拨号程序）<br>
+</span><span style="font-family:SimSun">| |-- Provision （预设应用的状态，使能应用）<br>
+</span><span style="font-family:SimSun">| |-- Settings （开机设定，包括电量、蓝牙、设备信息、界面、wifi等）<br>
+</span><span style="font-family:SimSun">| |-- SoundRecorder （录音机，可计算存储所需空间和时间）<br>
+</span><span style="font-family:SimSun">| |-- Stk （接收和发送短信）<br>
+</span><span style="font-family:SimSun">| |-- Sync （空） -------○1<br>
+</span><span style="font-family:SimSun">| |-- Updater （空）<br>
+</span><span style="font-family:SimSun">| `-- VoiceDialer （语音识别通话）<br>
+</span><span style="font-family:SimSun">|-- inputmethods （输入法）<br>
+</span><span style="font-family:SimSun">| |-- LatinIME （拉丁文输入法）<br>
+</span><span style="font-family:SimSun">| |-- OpenWnn （OpenWnn输入法）<br>
+</span><span style="font-family:SimSun">| `-- PinyinIME （拼音输入法）<br>
+</span><span style="font-family:SimSun">|-- providers （提供器，提供应用程序、界面所需的数据）<br>
+</span><span style="font-family:SimSun">| |-- ApplicationsProvider （应用程序提供器，提供应用程序启动项、更新等）<br>
+</span><span style="font-family:SimSun">| |-- CalendarProvider （日历提供器）<br>
+</span><span style="font-family:SimSun">| |-- ContactsProvider （联系人提供器）<br>
+</span><span style="font-family:SimSun">| |-- DownloadProvider （下载管理提供器）<br>
+</span><span style="font-family:SimSun">| |-- DrmProvider （创建和更新数据库时调用）<br>
+</span><span style="font-family:SimSun">| |-- GoogleContactsProvider （联系人提供器的子类，用以同步联系人）<br>
+</span><span style="font-family:SimSun">| |-- GoogleSubscribedFeedsProvider（设置信息提供器）<br>
+</span><span style="font-family:SimSun">| |-- ImProvider （空）<br>
+</span><span style="font-family:SimSun">| |-- ManagementProvider （空）<br>
+</span><span style="font-family:SimSun">| |-- MediaProvider （媒体提供器，提供存储数据）<br>
+</span><span style="font-family:SimSun">| |-- TelephonyProvider （彩信提供器）<br>
+</span><span style="font-family:SimSun">| |-- UserDictionaryProvider （用户字典提供器，提供用户常用字字典）<br>
+</span><span style="font-family:SimSun">| `-- WebSearchProvider （空）<br>
+</span><span style="font-family:SimSun">|-- services&nbsp;<br>
+</span><span style="font-family:SimSun">| |-- EasService （空）<br>
+</span><span style="font-family:SimSun">| `-- LockAndWipe （空）<br>
+</span><span style="font-family:SimSun">`-- wallpapers （墙纸）<br>
+</span><span style="font-family:SimSun">|-- Basic （基本墙纸，系统内置墙纸）<br>
+</span><span style="font-family:SimSun">|-- LivePicker （选择动态壁纸）<br>
+</span><span style="font-family:SimSun">|-- MagicSmoke （壁纸特殊效果）<br>
+</span><span style="font-family:SimSun">`-- MusicVisualization （音乐可视化，图形随音乐而变化）<br>
+</span><span style="font-family:SimSun">○1里面有一个隐藏的.git文件夹，内容都是一样的，没有有意义的代码，config看&#20284;乎是一个下载程序，因此认为这些文件夹下没有实质东西。<br>
+</span><span style="font-family:SimSun">prebuilt 目录 （x86和arm架构下预编译的一些资源）<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- android-arm （arm-android相关）<br>
+</span><span style="font-family:SimSun">| |-- gdbserver （gdb调试器）<br>
+</span><span style="font-family:SimSun">| `-- kernel （模拟的arm内核）<br>
+</span><span style="font-family:SimSun">|-- android-x86 （x86-android相关）<br>
+</span><span style="font-family:SimSun">| `-- kernel （空的）<br>
+</span><span style="font-family:SimSun">|-- common （通用编译好的代码，应该是java的）<br>
+</span><span style="font-family:SimSun">|-- darwin-x86 （drawin x86平台）<br>
+</span><span style="font-family:SimSun">| `-- toolchain （工具链）<br>
+</span><span style="font-family:SimSun">| |-- arm-eabi-4.2.1&nbsp;<br>
+</span><span style="font-family:SimSun">| |-- arm-eabi-4.3.1&nbsp;<br>
+</span><span style="font-family:SimSun">| `-- arm-eabi-4.4.0&nbsp;<br>
+</span><span style="font-family:SimSun">|-- darwin-x86_64 （drawin x86 64bit平台）<br>
+</span><span style="font-family:SimSun">|-- linux-x86 （linux x86平台）<br>
+</span><span style="font-family:SimSun">| `-- toolchain （工具链，我们应该主要用这个）<br>
+</span><span style="font-family:SimSun">| |-- arm-eabi-4.2.1&nbsp;<br>
+</span><span style="font-family:SimSun">| |-- arm-eabi-4.3.1&nbsp;<br>
+</span><span style="font-family:SimSun">| |-- arm-eabi-4.4.0&nbsp;<br>
+</span><span style="font-family:SimSun">| `-- i686-unknown-linux-gnu-4.2.1 （x86版编译器）<br>
+</span><span style="font-family:SimSun">|-- linux-x86_64 （linux x86 64bit平台）<br>
+</span><span style="font-family:SimSun">|-- windows （windows平台）<br>
+</span><span style="font-family:SimSun">`-- windows-x86_64 （64bit windows平台）<br>
+</span><span style="font-family:SimSun">system 目录 （底层文件系统库、应用及组件——C语言）<br>
+</span><span style="font-family:SimSun">.<br>
+</span><span style="font-family:SimSun">|-- Bluetooth （蓝牙相关）<br>
+</span><span style="font-family:SimSun">|-- core （系统核心工具盒接口）<br>
+</span><span style="font-family:SimSun">| |-- adb （adb调试工具）<br>
+</span><span style="font-family:SimSun">| |-- cpio （cpio工具，创建img）<br>
+</span><span style="font-family:SimSun">| |-- debuggerd （调试工具）<br>
+</span><span style="font-family:SimSun">| |-- fastboot （快速启动相关）<br>
+</span><span style="font-family:SimSun">| |-- include （系统接口头文件）<br>
+</span><span style="font-family:SimSun">| |-- init （init程序源代码）<br>
+</span><span style="font-family:SimSun">| |-- libacc （轻量级C编译器）<br>
+</span><span style="font-family:SimSun">| |-- libctest （libc测试相关）<br>
+</span><span style="font-family:SimSun">| |-- libcutils （libc工具）<br>
+</span><span style="font-family:SimSun">| |-- liblog （log库）<br>
+</span><span style="font-family:SimSun">| |-- libmincrypt （加密库）<br>
+</span><span style="font-family:SimSun">| |-- libnetutils （网络工具库）<br>
+</span><span style="font-family:SimSun">| |-- libpixelflinger （图形处理库）<br>
+</span><span style="font-family:SimSun">| |-- libsysutils （系统工具库）<br>
+</span><span style="font-family:SimSun">| |-- libzipfile （zip库）<br>
+</span><span style="font-family:SimSun">| |-- logcat （查看log工具）<br>
+</span><span style="font-family:SimSun">| |-- logwrapper （log封装工具）<br>
+</span><span style="font-family:SimSun">| |-- mkbootimg （制作启动boot.img的工具盒脚本）<br>
+</span><span style="font-family:SimSun">| |-- netcfg （网络配置netcfg源码）<br>
+</span><span style="font-family:SimSun">| |-- nexus （google最新手机的代码）<br>
+</span><span style="font-family:SimSun">| |-- rootdir （rootfs，包含一些etc下的脚本和配置）<br>
+</span><span style="font-family:SimSun">| |-- sh （shell代码）<br>
+</span><span style="font-family:SimSun">| |-- toolbox （toolbox，类&#20284;busybox的工具集）<br>
+</span><span style="font-family:SimSun">| `-- vold （SD卡管理器）<br>
+</span><span style="font-family:SimSun">|-- extras （额外工具）<br>
+</span><span style="font-family:SimSun">| |-- latencytop （a tool for software developers ，identifying system latency happen）<br>
+</span><span style="font-family:SimSun">| |-- libpagemap （pagemap库）<br>
+</span><span style="font-family:SimSun">| |-- librank （Java Library Ranking System库）<br>
+</span><span style="font-family:SimSun">| |-- procmem （pagemap相关）<br>
+</span><span style="font-family:SimSun">| |-- procrank （Java Library Ranking System相关）<br>
+</span><span style="font-family:SimSun">| |-- showmap （showmap工具）<br>
+</span><span style="font-family:SimSun">| |-- showslab （showslab工具）<br>
+</span><span style="font-family:SimSun">| |-- sound （声音相关）<br>
+</span><span style="font-family:SimSun">| |-- su （su命令源码）<br>
+</span><span style="font-family:SimSun">| |-- tests （一些测试工具）<br>
+</span><span style="font-family:SimSun">| `-- timeinfo （时区相关）<br>
+</span><span style="font-family:SimSun">`-- wlan （无线相关）<br>
+</span><span style="font-family:SimSun">`-- ti （ti网卡相关工具及库）</span><span style="font-family:SimSun"><br style="padding:0px; margin:0px">
+</span><span style="font-family:SimSun">vendor 目录 （厂家定制内容）<br>
+</span><span style="font-family:SimSun">|-- aosp （android open source project）<br>
+</span><span style="font-family:SimSun">| `-- products （一些板级规则）<br>
+</span><span style="font-family:SimSun">|-- htc （HTC公司）<br>
+</span><span style="font-family:SimSun">| |-- common-open （通用部分）<br>
+</span><span style="font-family:SimSun">| | `-- akmd （解压img用的工具）<br>
+</span><span style="font-family:SimSun">| |-- dream-open （G1开放部分）<br>
+</span><span style="font-family:SimSun">| |-- prebuilt-open （预编译开放部分）<br>
+</span><span style="font-family:SimSun">| `-- sapphire-open （sapphire这款型号开放内容）<br>
+</span><span style="font-family:SimSun">|-- pv-open （没东西）<br>
+</span><span style="font-family:SimSun">|-- qcom （里面基本是空的）<br>
+</span><span style="font-family:SimSun">`-- sample （google提供的样例）<br>
+</span><span style="font-family:SimSun">|-- apps （应用）<br>
+</span><span style="font-family:SimSun">| |-- client （用户）<br>
+</span><span style="font-family:SimSun">| `-- upgrade （升级）<br>
+</span><span style="font-family:SimSun">|-- frameworks （框架）<br>
+</span><span style="font-family:SimSun">| `-- PlatformLibrary （平台库）<br>
+</span><span style="font-family:SimSun">|-- products （产品）<br>
+</span><span style="font-family:SimSun">|-- sdk_addon （sdk添加部分）<br>
+</span><span style="font-family:SimSun">`-- skins （皮肤）<br>
+</span><span style="font-family:SimSun">`-- WVGAMedDpi （WVGA适用的图片）</span></strong></h3>
+<div><strong><span style="font-family:SimSun"><br>
+</span></strong></div>
+<p style="color:rgb(51,51,51); font-family:Arial; line-height:26px; margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; text-indent:2em; font-size:18px">
+</p>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+<!--172.16.140.15-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+
+
+ 
+
+
+        <div id="digg" ArticleId="9012387" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>1</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>1</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+                function btndigga() {
+                    $(".tracking-ad[data-mod='popu_222'] a").click();
+                }
+                function btnburya() {
+                    $(".tracking-ad[data-mod='popu_223'] a").click();
+                }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='http://blog.csdn.net/xiangjai/article/details/8837882';">上一篇</span><a href="http://blog.csdn.net/xiangjai/article/details/8837882" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">SIP协议解析与实现</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='http://blog.csdn.net/xiangjai/article/details/9019155';">下一篇</span><a href="http://blog.csdn.net/xiangjai/article/details/9019155" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">maven用途、核心概念、用法、常用参数和命令、扩展</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+            <div class="similar_article"   >
+                    <h4></h4>
+                    <div class="similar_c"style="margin:20px 0px 0px 0px">
+                        <div class="similar_c_t">
+                          &nbsp;&nbsp;相关文章推荐
+                        </div>
+                   
+                        <div class="similar_wrap tracking-ad" data-mod="popu_36" >                       
+                            <ul class="similar_list fl">    
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/tianxiawuzhei/article/details/7264953" title="Linux串口（serial、uart）驱动程序设计" strategy="BlogCommendFromBaidu" target="_blank">Linux串口（serial、uart）驱动程序设计</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/koffuxu/article/details/41896713" title="Linux 驱动模型初探3——device" strategy="BlogCommendFromBaidu" target="_blank">Linux 驱动模型初探3——device</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/u012005313/article/details/46928027" title="Android Studio 上如何使用LogCat" strategy="BlogCommendFromBaidu" target="_blank">Android Studio 上如何使用LogCat</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/zpj779878443/article/details/46376209" title="Android 4.0系统源码目录结构详解" strategy="BlogCommendFromBaidu" target="_blank">Android 4.0系统源码目录结构详解</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/tfs080640234/article/details/51888458" title="Android 5.1.1 源码目录结构" strategy="BlogCommendFromBaidu" target="_blank">Android 5.1.1 源码目录结构</a>
+                                   </li>
+                            </ul>
+                              <ul class="similar_list fr">      
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/finewind/article/details/46324507" title="android系统架构及源码目录结构" strategy="BlogCommendFromBaidu" target="_blank">android系统架构及源码目录结构</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/zuolongsnail/article/details/6817427" title="Android源码目录结构" strategy="BlogCommendFromCsdn" target="_blank">Android源码目录结构</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://maozhuxigood.iteye.com/blog/2040092" title="Android源码目录结构详解" strategy="BlogCommendFromCsdn" target="_blank">Android源码目录结构详解</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/fengliang191/article/details/40678731" title="最全的Android源码目录结构详解" strategy="BlogCommendFromCsdn" target="_blank">最全的Android源码目录结构详解</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://2528.iteye.com/blog/1733468" title="Android 源码目录结构详解" strategy="BlogCommendFromCsdn" target="_blank">Android 源码目录结构详解</a>
+                                   </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>   
+      
+</div>
+
+    <div>
+        
+
+        <script type="text/javascript">
+            /*博客内容页下方Banner1-728*90，创建于2016-12-13*/
+            var cpro_id = "u2843949";
+        </script>
+        <script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+
+     </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/xiangjai/svc/GetSuggestContent/9012387",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+        <dl class="blog-ass-articl tracking-ad" id="res-relatived" data-mod="popu_84"  > 
+             <dt><span>猜你在找</span></dt>    
+           
+    
+           
+
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/30" title="C语言及程序设计（讲师：贺利坚）" strategy="undefined" target="_blank">C语言及程序设计（讲师：贺利坚）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/379" title="Python爬虫工程师培养课程全套（讲师:韦玮）" strategy="undefined" target="_blank">Python爬虫工程师培养课程全套（讲师:韦玮）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/468" title="Python全栈开发入门与实战课（讲师：李杰）" strategy="undefined" target="_blank">Python全栈开发入门与实战课（讲师：李杰）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/233" title="2017软考网络规划设计师视频套餐（讲师：任铄）" strategy="undefined" target="_blank">2017软考网络规划设计师视频套餐（讲师：任铄）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/169" title="2017软考软件设计师视频套餐（讲师：任铄）" strategy="undefined" target="_blank">2017软考软件设计师视频套餐（讲师：任铄）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/144" title="2017软考-信息系统项目管理师视频套餐（讲师：任铄）" strategy="undefined" target="_blank">2017软考-信息系统项目管理师视频套餐（讲师：任铄）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/58" title="软考(高级)项目经理实战营（讲师：张传波）" strategy="undefined" target="_blank">软考(高级)项目经理实战营（讲师：张传波）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/58" title="微信公众平台开发套餐（讲师：刘运强）" strategy="undefined" target="_blank">微信公众平台开发套餐（讲师：刘运强）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/422" title="深度学习原理+实战+算法+主流框架套餐（讲师：唐宇迪）" strategy="undefined" target="_blank">深度学习原理+实战+算法+主流框架套餐（讲师：唐宇迪）</a>
+                        </dd>
+                        <dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px; white-space: nowrap;">
+                             <a href="http://edu.csdn.net/combo/detail/471" title="2017系统集成项目管理工程师通关套餐（讲师：徐朋）" strategy="undefined" target="_blank">2017系统集成项目管理工程师通关套餐（讲师：徐朋）</a>
+                        </dd>
+        </dl>
+
+
+
+
+            
+                                    
+            
+                                    
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '9012387';
+    var commentscount = 0;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='Android源码目录结构详解';
+
+</script>
+
+
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+    <div class="side">
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/xiangjai" target="_blank">
+    <img src="http://avatar.csdn.net/5/2/1/1_xiangjai.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/xiangjai" class="user_name" target="_blank">xiangjai</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=xiangjai','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                         <div class="ico_expert" title="CSDN博客准专家"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" style=" cursor:pointer;width:54px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhunzhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="4" >
+                                            </a>
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png" onmouseover="m_over_m(this,4)" onmouseout="m_out_m()" alt="2" >
+                                            </a>
+               </div>
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>592353次</span></li>
+    <li>积分：<span>6503</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog6.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：6503 </div>
+        </span>  </li>
+    <li>排名：<span>第3528名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>171篇</span></li>
+    <li>转载：<span>114篇</span></li>
+    <li>译文：<span>10篇</span></li>
+    <li>评论：<span>66条</span></li>
+</ul>
+</ul>
+</div>
+
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body" class="form_search">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search csdn-tracking-statistics" target="_blank"  data-mod="popu_306">
+        <span><input id="inputSearch" type="text" class="blogsearch" title="请输入关键字" /></span>
+        <input id="btnSubmit" type="button" value="搜索" title="search in blog" />
+        <input type="hidden" name="q" id="inputQ" />
+        <input type="hidden" name="t" value="blog" />
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div>
+
+<script type="text/javascript">
+
+   
+    $(function () {
+        $("#btnSubmit").unbind("click");
+        $("#btnSubmit").click(function () {           
+            search();
+        });
+
+        $("#frmSearch").submit(function () {           
+            search();
+            return false;
+        });
+
+        function search()
+        {
+            if ($("#inputSearch").val() == "") {               
+                alert("请录入搜索关键词！");                         
+                return false;
+            }
+            //var url = "http://so.csdn.net/so/search/s.do?q=" + encodeURIComponent($("#inputSearch").val()) + "&u=" + username + "&t=blog";           
+            var url = "https://www.baidu.com/s?wd=" + encodeURIComponent($("#inputSearch").val()) + "%20site%3Ablog.csdn.net"
+            window.location.href = url;
+        }   
+    });
+</script><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/14091.html" target="_blank"><img src="http://img.blog.csdn.net/20170103095419984" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/14091.html" target="_blank">spring</a>
+    <p>文章：35篇</p>
+    <span>阅读：12989</span>
+    </td>
+    </tr></table>
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/14090.html" target="_blank"><img src="http://img.blog.csdn.net/20161231102254939" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/14090.html" target="_blank">android音视频</a>
+    <p>文章：19篇</p>
+    <span>阅读：142570</span>
+    </td>
+    </tr></table>
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/14068.html" target="_blank"><img src="http://img.blog.csdn.net/20161229170149658" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/14068.html" target="_blank">mybatis</a>
+    <p>文章：13篇</p>
+    <span>阅读：6159</span>
+    </td>
+    </tr></table>
+    </ul>
+</div><div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/xiangjai/article/category/894181" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java</a><span>(28)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1113327" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android</a><span>(84)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1125066" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">设计</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1129617" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">http</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1136484" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jdbc</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1303963" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">xmpp</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1311601" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jquery mobile</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1371998" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">sip</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1374291" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jni</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1374613" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">c/c++</a><span>(22)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1439093" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1441303" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">js</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1520311" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">phonegap</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/1698273" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android音视频</a><span>(19)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/2191417" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android事件传递</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/2439041" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ios</a><span>(24)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6279333" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">python</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6300793" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">j2ee</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6302554" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">spring</a><span>(36)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6309120" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">mybatis</a><span>(13)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6343301" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">qt</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6442944" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">linux</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6460461" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">微信开发</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6482681" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">web前端</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6582629" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">oracle</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6636975" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">ApacheTiles</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6666743" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">大数据</a><span>(13)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6670799" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">centos</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6670888" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">nginx</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6675662" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">solr</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6741123" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">zookeeper</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6745837" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">分布式</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6745838" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">集群</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6848620" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">storm</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/xiangjai/article/category/6995631" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">quartz</a><span>(2)</span>
+                </li>
+</ul>
+</div><div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/xiangjai/article/month/2017/07">2017年07月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2017/06">2017年06月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2017/05">2017年05月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2017/04">2017年04月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2017/03">2017年03月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2017/02">2017年02月</a><span>(6)</span></li><li><a href="/xiangjai/article/month/2017/01">2017年01月</a><span>(21)</span></li><li><a href="/xiangjai/article/month/2016/12">2016年12月</a><span>(33)</span></li><li><a href="/xiangjai/article/month/2016/10">2016年10月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2016/09">2016年09月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2016/08">2016年08月</a><span>(13)</span></li><li><a href="/xiangjai/article/month/2016/07">2016年07月</a><span>(9)</span></li><li><a href="/xiangjai/article/month/2016/06">2016年06月</a><span>(10)</span></li><li><a href="/xiangjai/article/month/2016/05">2016年05月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2016/03">2016年03月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2015/12">2015年12月</a><span>(7)</span></li><li><a href="/xiangjai/article/month/2015/11">2015年11月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2015/10">2015年10月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2015/08">2015年08月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2015/07">2015年07月</a><span>(7)</span></li><li><a href="/xiangjai/article/month/2015/06">2015年06月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2015/05">2015年05月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2015/03">2015年03月</a><span>(9)</span></li><li><a href="/xiangjai/article/month/2015/02">2015年02月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2015/01">2015年01月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2014/12">2014年12月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2014/11">2014年11月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2014/10">2014年10月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2014/09">2014年09月</a><span>(5)</span></li><li><a href="/xiangjai/article/month/2014/08">2014年08月</a><span>(5)</span></li><li><a href="/xiangjai/article/month/2014/07">2014年07月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2014/06">2014年06月</a><span>(7)</span></li><li><a href="/xiangjai/article/month/2014/05">2014年05月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2014/04">2014年04月</a><span>(5)</span></li><li><a href="/xiangjai/article/month/2014/03">2014年03月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2014/01">2014年01月</a><span>(6)</span></li><li><a href="/xiangjai/article/month/2013/12">2013年12月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2013/11">2013年11月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2013/10">2013年10月</a><span>(9)</span></li><li><a href="/xiangjai/article/month/2013/09">2013年09月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2013/07">2013年07月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2013/06">2013年06月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2013/04">2013年04月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2013/03">2013年03月</a><span>(6)</span></li><li><a href="/xiangjai/article/month/2013/01">2013年01月</a><span>(3)</span></li><li><a href="/xiangjai/article/month/2012/12">2012年12月</a><span>(11)</span></li><li><a href="/xiangjai/article/month/2012/11">2012年11月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2012/10">2012年10月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2012/08">2012年08月</a><span>(6)</span></li><li><a href="/xiangjai/article/month/2012/07">2012年07月</a><span>(6)</span></li><li><a href="/xiangjai/article/month/2012/06">2012年06月</a><span>(4)</span></li><li><a href="/xiangjai/article/month/2012/04">2012年04月</a><span>(7)</span></li><li><a href="/xiangjai/article/month/2012/03">2012年03月</a><span>(12)</span></li><li><a href="/xiangjai/article/month/2011/11">2011年11月</a><span>(2)</span></li><li><a href="/xiangjai/article/month/2011/09">2011年09月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2011/06">2011年06月</a><span>(1)</span></li><li><a href="/xiangjai/article/month/2011/01">2011年01月</a><span>(1)</span></li>
+</div>
+</ul>
+</div>
+<div id="hotarticls" class="panel tracking-ad" data-mod="popu_340">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/xiangjai/article/details/44238005" title="码流 / 码率 / 比特率 / 帧速率 / 分辨率 / 高清的区别">码流 / 码率 / 比特率 / 帧速率 / 分辨率 / 高清的区别</a><span>(76830)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/7727528" title="Android自定义View ---  绘制圆环">Android自定义View ---  绘制圆环</a><span>(42571)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/12653203" title="“硬解码”与“软解码”的区别">“硬解码”与“软解码”的区别</a><span>(28731)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/12908671" title="android实时视频网络传输方案总结（一共有五套）">android实时视频网络传输方案总结（一共有五套）</a><span>(23488)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/8109213" title="Android中通过Intent传递对象、集合问题">Android中通过Intent传递对象、集合问题</a><span>(18362)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/9012387" title="Android源码目录结构详解">Android源码目录结构详解</a><span>(16211)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/23181819" title="Android开源项目--分类汇总">Android开源项目--分类汇总</a><span>(13489)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/7413522" title="An internal error occurred during: &quot;Launching hello&quot;. java.lang.NullPointerException">An internal error occurred during: &quot;Launching hello&quot;. java.lang.NullPointerException</a><span>(12987)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/18081905" title="android代码混淆及打包相关">android代码混淆及打包相关</a><span>(12572)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/8312599" title="android之webview使用-处理404等错误">android之webview使用-处理404等错误</a><span>(11904)</span>
+</li>
+</ul>
+</div>
+<div id="hotarticls2" class="panel tracking-ad" data-mod="popu_341">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/xiangjai/article/details/12908671" title="android实时视频网络传输方案总结（一共有五套）">android实时视频网络传输方案总结（一共有五套）</a><span>(15)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/49125153" title="IOS SDK  NSSetUncaughtExceptionHandler异常处理">IOS SDK  NSSetUncaughtExceptionHandler异常处理</a><span>(4)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/20369347" title="Android  studio 遇到Android SDK ： Error when loading the SDK">Android  studio 遇到Android SDK ： Error when loading the SDK</a><span>(3)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/51452217" title="Retrofit2完全教程">Retrofit2完全教程</a><span>(3)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/9419747" title="开发phonegap应用问题汇总">开发phonegap应用问题汇总</a><span>(3)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/50156485" title="IOS 多个ImageView图片层叠透明区域点击事件穿透">IOS 多个ImageView图片层叠透明区域点击事件穿透</a><span>(3)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/49095875" title="android 实现条形码生成技术-Barcode4j、zxing">android 实现条形码生成技术-Barcode4j、zxing</a><span>(3)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/52955889" title="springmvc 集成 tiles2实现页面模板局部刷新(一）">springmvc 集成 tiles2实现页面模板局部刷新(一）</a><span>(3)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/44238005" title="码流 / 码率 / 比特率 / 帧速率 / 分辨率 / 高清的区别">码流 / 码率 / 比特率 / 帧速率 / 分辨率 / 高清的区别</a><span>(2)</span>
+</li>
+<li>
+<a href="/xiangjai/article/details/44675121" title="Android开发相关的Blog推荐——跟随大神的脚步才能成长为大神">Android开发相关的Blog推荐——跟随大神的脚步才能成长为大神</a><span>(2)</span>
+</li>
+</ul>
+</div>
+<div id="homepageArticles" class="panel tracking-ad" data-mod="popu_4">
+<ul class="panel_head"><span>推荐文章</span></ul>
+<ul class="panel_body" id="ad_commend">
+<ul>
+<li><a href="http://blog.csdn.net/blogdevteam/article/details/75116901" target="_blank">* CSDN日报20170714——《从创业到再就业，浅述对程序员职业生涯的看法》</a></li>
+<li><a href="http://blog.csdn.net/jiangwei0910410003/article/details/74886918" 
+target="_blank">* Android 逆向 | 锁屏密码算法解析以及破解方案</a></li>
+<li><a href="http://blog.csdn.net/hopeztm/article/details/75201823"target="_blank">* 从单一WAR到多活，记述一个创业公司的架构演变</a></li>
+<li><a href="http://blog.csdn.net/sileixinhua/article/details/75203725" 
+target="_blank">* 我的AI转型之路与AI之我见（非985211的奋斗路程与视角）</a></li>
+<li><a href="http://blog.csdn.net/u013709270/article/details/74892124" 
+target="_blank">* AI大行其道，你准备好了吗？—谨送给徘徊于转行AI的程序员</a></li>
+<li><a href="http://blog.csdn.net/chancein007/article/details/74943322" 
+target="_blank">* AI转型中的思考和洞见</a></li>
+
+</ul></ul>
+</div>
+
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/xiangjai/article/details/12908671#comments">android实时视频网络传输方案总结（一共有五套）</a>
+    <p style="margin:0px;"><a href="/goodmentc" class="user_name">goodmentc</a>:
+楼主，请问一下，这几种方案过时了吗？
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/14225731#comments">PCM(44字节)的Wav文件头及其相关的编程方法</a>
+    <p style="margin:0px;"><a href="/whbsxx1314" class="user_name">whbsxx1314</a>:
+顶一下
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/44238005#comments">码流 / 码率 / 比特率 / 帧速率 / 分辨率 / 高清的区别</a>
+    <p style="margin:0px;"><a href="/faildd" class="user_name">faildd</a>:
+赞，转载了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/44238005#comments">码流 / 码率 / 比特率 / 帧速率 / 分辨率 / 高清的区别</a>
+    <p style="margin:0px;"><a href="/qq_33561419" class="user_name">qq_33561419</a>:
+赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/51452217#comments">Retrofit2完全教程</a>
+    <p style="margin:0px;"><a href="/xiangjai" class="user_name">xiangjai</a>:
+@github_34123799:好的，谢了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/51452217#comments">Retrofit2完全教程</a>
+    <p style="margin:0px;"><a href="/github_34123799" class="user_name">github_34123799</a>:
+public interface BlogService {      /**      * met...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/51452217#comments">android实时视频网络传输方案总结（一共有五套）</a>
+    <p style="margin:0px;"><a href="/qq_15077947" class="user_name">qq_15077947</a>:
+是否有demo，发一份。qq:1060256575
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/51452217#comments">android实时视频网络传输方案总结（一共有五套）</a>
+    <p style="margin:0px;"><a href="/qq_15077947" class="user_name">qq_15077947</a>:
+是否有demo，发一份。1060256474
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/49451617#comments">SVPullToRefresh问题解决 同时进行上拉和下拉刷新</a>
+    <p style="margin:0px;"><a href="/qq_34962252" class="user_name">qq_34962252</a>:
+难道你没发现 解开哪行的注释 上拉刷新会彻底不能刷新吗
+    </p>
+    </li>
+    <li>
+   
+         <a href="/xiangjai/article/details/52955889#comments">springmvc 集成 tiles2实现页面模板局部刷新(一）</a>
+    <p style="margin:0px;"><a href="/hlyjava" class="user_name">hlyjava</a>:
+@xiangjai:看到了，谢谢
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+
+                   <!-- 广告位开始 -->                    <!-- 广告位结束 -->
+                   <div class="tracking-ad" data-view="true"  data-mtp="63" data-order="40" data-con="ad_content_1260" style="width: 200px; height: 500px;">
+                         <div id="nav_show_top_stop" style="width: 200px;height: 500px;z-index:1000"><div id="cpro_u2734128"></div>
+                             <div id="cpro_u3031287"></div></div>
+                   </div>
+    <script type="text/javascript">
+        setTimeout(function () {
+            var naviga_offsetTop = 0;
+            function naviga_stay_top() { var scrollTop = jQuery(document).scrollTop(); if (scrollTop > naviga_offsetTop) { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": "0px" }); } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); } }
+            function onload_function() { naviga_offsetTop = jQuery("#nav_show_top_stop").position().top; jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top); jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top); } jQuery(document).ready(onload_function);
+
+        }, 200);
+    </script>
+<script type="text/javascript">(window.cproArray = window.cproArray || []).push({ id: "u2734128" });  </script> 
+                    <script src="http://cpro.baidustatic.com/cpro/ui/c.js" type="text/javascript"></script> 
+                   <script type="text/javascript">
+                       /*PC端-博客内容页左侧Button2-200*200-2017/7/10*/
+                       (window.cproArray = window.cproArray || []).push({ id: "u3031287" });
+</script>
+<script type="text/javascript" src="http://cpro.baidustatic.com/cpro/ui/c.js"></script>
+
+           </div>   
+
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="http://passport.csdn.net/content/loginbox/login.js"></script>
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+      <!--new top-->
+    
+
+     
+
+   
+        <!--new top-->
+   
+   
+
+    
+    
+    
+   
+
+   
+
+
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+          <script type="text/javascript">
+              //$(function () {
+              //    setTimeout(function () {
+              //        var searchtitletags = articletitle + ',' + $("#tags").html();
+              //        searchService({
+              //            index: 'blog',
+              //            query: searchtitletags,
+              //            from: 5,
+              //            size: 5,
+              //            appendTo: '#res',
+              //            url: 'recommend',
+              //            his: 2,
+              //            client: "blog_cf_enhance",
+              //            tmpl: '<dd style="background:url(http://static.blog.csdn.net/skin/default/images/blog-dot-red3.gif) no-repeat 0 10px;"><a href="#{ url }" title="#{ title }" strategy="#{ strategy }">#{ title }</a></dd>'
+              //        });
+              //    }, 1000);
+              //});
+
+         </script>
+    
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js" type="text/javascript"></script>
+        
+    <script type="text/javascript" src="http://c.csdnimg.cn/blog/csdn_public_blog_detail.min.js?20170626001"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=826045"></script>
+
+     
+    
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+
+    
+    
+        
+     
+
+    
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+
+        <script type="text/javascript">
+
+            $(function () {
+                var fromjs = $("#fromjs");
+                if (fromjs.length > 0) {
+                    $("#fromjs .markdown_views pre").addClass("prettyprint");
+                    prettyPrint();
+
+                    $('pre.prettyprint code').each(function () {
+                        var lines = $(this).text().split('\n').length;
+                        var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                        $(this).addClass('has-numbering').parent().append($numbering);
+                        for (i = 1; i <= lines; i++) {
+                            $numbering.append($('<li/>').text(i));
+                        };
+                        $numbering.fadeIn(1700);
+                    });
+
+                    $('.pre-numbering li').css("color", "#999");
+                }
+            });
+
+            $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+            //$(".toc a[target='_blank']").attr("target", "");
+
+            setTimeout(function () {
+                $(".toc a[target='_blank']").attr("target", "");
+            }, 500);
+
+        </script>
+
+</body>
+</html>   
