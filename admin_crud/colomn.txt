@@ -1,0 +1,85 @@
+﻿
+  const columns: ProColumns<CrmOrderTableListItem>[] = [
+    {
+      title: '创建时间',
+      dataIndex: 'create_time',
+      valueType: 'dateTime',
+      key: 'create_time',
+      hideInSearch: true,
+      sorter: (a, b) => Number(new Date(String(a.created_at))) - Number(new Date(String(b.created_at))),
+    },
+
+    {
+      title: '订单时间',
+      dataIndex: 'create_time',
+      valueType: 'date',
+      key: 'create_time_hide',
+      hideInTable: true,
+    },
+    {
+      title: '下单用户',
+      dataIndex: 'user_name',
+      key: 'user_name'
+    },
+
+    {
+      title: '所选套餐',
+      dataIndex: 'order_detail',
+      key: 'order_detail',
+      render: (text: any, record: any) => {
+        return (<a onClick={() => { handleShowDetail(record) }}>{JSON.parse(text)[0].value}</a>)
+      }
+    },
+    {
+      title: '套餐',
+      dataIndex: 'phone',
+      key: 'phone'
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      hideInSearch: true,
+      key: 'status',
+      valueEnum: {
+        //0:刚下单;1:已接单;2:已预约;3:已上门办理;4:已返利;5:已竣工;6:已退单',
+        0: {
+          text: '刚下单',
+        },
+        1: {
+          text: '已接单',
+        },
+        2: {
+          text: '已预约',
+        },
+        3: {
+          text: '已上门办理',
+        },
+        4: {
+          text: '已返利',
+        },
+        5: {
+          text: '已竣工',
+        },
+        6: {
+          text: '已退单',
+        },
+      },
+    },
+    {
+      title: '详细地址',
+      dataIndex: 'address',
+      hideInSearch: true,
+      key: 'address',
+      render: (text: any) => {
+        //"{"provinceName":"广西壮族自治区","cityName":"南宁市","countryName":"青秀区","detailInfo":"民族大道18号"}"
+        let js_p = JSON.parse(text);
+        return (
+          <>{`${js_p.provinceName}${js_p.cityName}${js_p.countryName}${js_p.detailInfo}`}</>
+        )
+      }
+    },
+   
+  ];
+
+
+"`${text.provinceName}${text.cityName}${text.countryName}${text.detailInfo}`"
