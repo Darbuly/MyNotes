@@ -1,0 +1,6 @@
+strace  -f -F -p 28979 -o output.txt
+
+
+-f 跟踪由fork调用所产生的子进程. 
+-F 尝试跟踪vfork调用.在-f时,vfork不被跟踪. 
+-p pid 跟踪指定的进程pid.

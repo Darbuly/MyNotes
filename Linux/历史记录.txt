@@ -1,0 +1,2 @@
+history | grep php-fpm
+用于显示指定数目的指令命令
