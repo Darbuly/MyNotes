@@ -1,0 +1,3 @@
+cd /www/order
+
+sudo  nohup php /www/order/artisan swoole start&
