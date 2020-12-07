@@ -1,0 +1,6 @@
+firewall-cmd --list-ports     #查看firewall防火墙开放端口
+
+firewall-cmd --zone=public --add-port=80/tcp --permanent   #开放firewall防火墙端口，需重启防火墙生效
+
+firewall-cmd --reload      #重启firewal防火墙
+
