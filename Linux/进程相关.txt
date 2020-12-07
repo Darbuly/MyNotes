@@ -9,7 +9,7 @@
 
 ¡¡¡¡ps -ef|grep ssh
 
-
+kill -9 3781 
 
 
 
