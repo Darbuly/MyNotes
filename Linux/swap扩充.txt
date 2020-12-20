@@ -1,0 +1,24 @@
+1.新建swap****分区空间
+cd /home/
+
+ mkdir -p swap
+
+ cd /home/swap/
+
+ dd if=/dev/zero of=swapfile bs=1M count=1024
+
+
+2.mkswap****创建交换文件
+
+mkswap swapfile
+
+3.swapon****激活
+swapon swapfile
+
+4.验证
+free -m
+
+5.开机启动：由于以上操作为临时生效，服务器重启会失效。所以要设置开机启动。
+#vi /etc/fstab
+
+/home/swap/swapfile swap swapdefaults 0 0
