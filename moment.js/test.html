@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./moment.min.js"></script>
+    <title>Document</title>
+
+    <script>
+        moment.locale();
+        console.log(moment(moment().format('L') + ' 15:00:00').add(1, 'hours').format('HH:mm:ss'));
+        console.log(moment('2021-01-14').add(1, 'days').format('YYYY-MM-DD'))
+        console.log(moment('2021-01-14') < moment('2021-01-13'))
+
+        let weekofday = moment('2021-01-08');//我要算出 2021-01-08 的之后的第一个周3日期
+        console.log(weekofday.subtract(weekofday.format('E') - 3 - 7, 'days').format('YYYY-MM-DD'))
+
+        weekofday = moment('2021-01-08');//我要算出 2021-01-08 的之后的第一个月25号日期
+
+        console.log(weekofday.subtract(weekofday.format('D') - 30, 'days').format('YYYY-MM-DD'))
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
