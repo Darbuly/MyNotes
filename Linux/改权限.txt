@@ -1,1 +1,3 @@
 chmod -R 777 /var.....
+
+chown -R www56:www56 uploads/  
