@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<!-- saved from url=(0035)https://www.touzid.com/article/4925 -->
+<html class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+<meta name="renderer" content="webkit">
+<title>全A-国债估值模型功能说明 - 投资数据网</title>
+<meta name="keywords" content="a-,国债,估值,模型,功能,说明">
+<meta name="description" content="全A-国债估值模型功能说明 - 股债收益率模型（EYBY），有的研报又称为“全A-国债估值模型”，它是一个经典的股市估值模型，其基本思想是将“股票收益率”（EY）与“债券收益率”（BY）进行对比，计算出(EY-BY)，当该数值为正数，股票收益率更高，当该数值为负数，债券收益率更高。
+ 
+...">
+<!--<base href="https://www.touzid.com/">--><base href="."><!--[if IE]></base><![endif]-->
+<link href="https://www.touzid.com/static/img/logo2.png" rel="shortcut icon" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="./全A-国债估值模型功能说明 - 投资数据网_files/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="./全A-国债估值模型功能说明 - 投资数据网_files/icon.css">
+<link rel="stylesheet" type="text/css" href="./全A-国债估值模型功能说明 - 投资数据网_files/share.min.css">
+<link href="./全A-国债估值模型功能说明 - 投资数据网_files/common.css" rel="stylesheet" type="text/css">
+<link href="./全A-国债估值模型功能说明 - 投资数据网_files/link.css" rel="stylesheet" type="text/css">
+<link href="./全A-国债估值模型功能说明 - 投资数据网_files/style.css" rel="stylesheet" type="text/css">
+
+
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/hm.js"></script><script type="text/javascript">
+	var _0C54E01C620A6554EBC8B1A06A6164B5="";
+	var G_POST_HASH=_0C54E01C620A6554EBC8B1A06A6164B5;
+	var G_INDEX_SCRIPT = "";
+	var G_SITE_NAME = "投资数据网";
+	var G_BASE_URL = "https://www.touzid.com/";
+	var G_STATIC_URL = "https://www.touzid.com/static";
+	var G_UPLOAD_URL = "https://www.touzid.com/uploads";
+	var G_USER_ID = "";
+	var G_USER_NAME = "";
+	var G_UPLOAD_ENABLE = "N";
+	var G_UNREAD_NOTIFICATION = 0;
+	var G_NOTIFICATION_INTERVAL = 100000;
+	var G_CAN_CREATE_TOPIC = "";
+	var G_ADVANCED_EDITOR_ENABLE = "Y";
+
+	</script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/jquery.2.js" type="text/javascript"></script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/jquery.form.js" type="text/javascript"></script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/plug-in_module.js" type="text/javascript"></script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/aws.js" type="text/javascript"></script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/aw_template.js" type="text/javascript"></script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/app.js" type="text/javascript"></script>
+<script type="text/javascript" src="./全A-国债估值模型功能说明 - 投资数据网_files/compatibility.js"></script>
+<!--[if lte IE 8]>
+	<script type="text/javascript" src="https://www.touzid.com/static/js/respond.js"></script>
+<![endif]-->
+<style type="text/css">.fancybox-margin{margin-right:17px;}</style></head>
+<body><noscript unselectable="on" id="noscript">
+    <div class="aw-404 aw-404-wrap container">
+        <img src="https://www.touzid.com/static/common/no-js.jpg">
+        <p>你的浏览器禁用了JavaScript, 请开启后刷新浏览器获得更好的体验!</p>
+    </div>
+</noscript>
+<style>
+
+		.social-share{
+			position: fixed;
+			width: 50px;
+			height: 204px;
+			bottom: 50px;
+			right: 1%;
+			margin-right: 15px;
+			font-size: 14px;
+			z-index: 200;
+		}
+		.row-pad{ width: 1000px; margin: 0 auto;}
+	</style>
+
+	<div class="aw-top-menu-wrap">
+		<div class="container">
+			<!-- logo -->
+			<div class="aw-lg hidden-xs">
+				<a href="https://www.touzid.com/"><img src="./全A-国债估值模型功能说明 - 投资数据网_files/logo.png">投资研究</a>
+			</div>
+			<!-- end logo -->
+			<!-- 搜索框 -->
+			<div class="aw-search-box  hidden-xs hidden-sm">
+				<form class="navbar-search" action="https://www.touzid.com/search/" id="global_search_form" method="post">
+					<input class="form-control search-query" type="text" placeholder="搜索问题、话题或人" autocomplete="off" name="q" id="aw-search-query">
+					<span title="搜索" id="global_search_btns" onclick="$(&#39;#global_search_form&#39;).submit();"><i class="icon icon-search"></i></span>
+					<div class="aw-dropdown">
+						<div class="mod-body">
+							<p class="title">输入关键字进行搜索</p>
+							<ul class="aw-dropdown-list collapse"></ul>
+							<p class="search"><span>搜索:</span><a onclick="$(&#39;#global_search_form&#39;).submit();"></a></p>
+						</div>
+						<div class="mod-footer">
+							<a href="https://www.touzid.com/publish" onclick="$(&#39;#header_publish&#39;).click();" class="pull-right btn btn-mini btn-success publish">发起问题</a>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- end 搜索框 -->
+			<!-- 导航 -->
+			<div class="aw-top-nav navbar">
+				<div class="navbar-header">
+				  <button class="navbar-toggle pull-left">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				  </button>
+				</div>
+				<nav role="navigation" class="collapse navbar-collapse bs-navbar-collapse">
+				  <ul class="nav navbar-nav">
+				  	<li><a href="https://www.touzid.com/company/mutual-market.html">公司</a></li>
+				  	<li><a href="https://www.touzid.com/industry/">行业</a></li>
+				  	<li><a href="https://www.touzid.com/indice/">指数</a></li>
+				  	<li><a href="https://www.touzid.com/model/market-price.html">市场</a></li>
+										<li><a href="https://www.touzid.com/explore" class=""><i class="icon icon-list"></i> 发现</a></li>
+
+					<li><a href="https://www.touzid.com/question/" class="">问题</a></li>
+
+					<li><a href="https://www.touzid.com/article/" class="active">文章</a></li> 
+
+					<li><a href="https://www.touzid.com/topic/"><i class="icon icon-topic"></i> 话题</a></li>
+															<li>
+						<a style="font-weight:bold;">· · ·</a>
+						<div class="dropdown-list pull-right">
+							<ul id="extensions-nav-list">
+																							</ul>
+						</div>
+					</li>
+				  </ul>
+				</nav>
+			</div>
+			<!-- end 导航 -->
+			<!-- 用户栏 -->
+			<div class="aw-user-nav">
+				<!-- 登陆&注册栏 -->
+									<a class="login btn btn-normal btn-primary" href="https://www.touzid.com/account/login/">登录</a>
+					<!--<a class="login btn btn-normal btn-primary" href="https://www.touzid.com/account/login/">QQ登录</a>
+					<a class="register btn btn-normal btn-success" href="https://www.touzid.com/account/register/">注册</a>-->
+								<!-- end 登陆&注册栏 -->
+			</div>
+			<!-- end 用户栏 -->
+			<!-- 发起 -->
+						<!-- end 发起 -->
+		</div>
+	</div>
+	
+
+<div class="aw-container-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="aw-content-wrap clearfix">
+                <div class="col-sm-12 col-md-9 aw-main-content aw-article-content">
+                    <div class="aw-mod aw-topic-bar" id="question_topic_editor" data-type="article" data-id="4925">
+                        <div class="tag-bar clearfix">
+                                                                                    <span class="topic-tag" data-id="21">
+                                <a class="text" href="https://www.touzid.com/topic/%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E">功能说明</a>
+                            </span>
+                                                        
+                                                    </div>
+                    </div>
+                    <div class="aw-mod aw-question-detail">
+                        <div class="mod-head">
+                            <h1>
+                                全A-国债估值模型功能说明                            </h1>
+
+                                                    </div>
+                        <div class="mod-body">
+                            <div class="content markitup-box">
+                                <strong>股债收益率模型（EYBY）</strong>，有的研报又称为“全A-国债估值模型”，它是一个经典的股市估值模型，其基本思想是将“股票收益率”（EY）与“债券收益率”（BY）进行对比，计算出(EY-BY)，当该数值为正数，股票收益率更高，当该数值为负数，债券收益率更高。<br>
+&nbsp;<br>
+它是一个描述两个市值估值相对“风险溢价”水平的指标，而非绝对的预测模型。<br>
+使用数据源是沪深全A股票收益率（中位数）、10年国债的到期收益率，其中股票收益率为市盈率（TTM）倒数，<br>
+&nbsp;<br>
+实时数据查询地址：<a href="https://www.touzid.com/model/rm-rf.html" rel="nofollow" target="_blank">链接</a><br>
+<br>
+<br>
+全A-国债估值模型的数据选取<br>
+<br>
+<br>
+模型的核心数据也是市盈率这个指标，但是用的市盈率中位数，中位数是一个能代表全部数据中等水平的数值，通俗理解就是一半样本数据在这数值前面，另一半样本数据在这数值后面。所以全市场个股市盈率中位数，它能非常客观地代表全A股市场整体估值水平，不会受到大盘权重低估值影响，也不会受到市场某些极端高估值个股影响。<br>
+<br>
+模型的另一核心数据是10年国债收益率。国债是国家信用背书的，大国发行的国债可以看做无风险资产的代表。<br>
+选取国债收益率作为核心数据原因有两个：<br>
+<br>
+其一，股票是一类风险资产，但是在它足够低估时买入，这时它就是一类风险就很小很小的资产。那怎么衡量股票资产是否已经低估到风险足够小了呢？用无风险资产（国债）与之相比较。举个例子，股市市盈率中位数为20（低估中），相当于未来收益率为1/22=4.5%，而此时国债收益率为5%，两者你会选哪个？相信大部分散户会选择大量买入股票，但追求确定性机会的大机构大资金他们大概率不会。<br>
+<br>
+其二，国债收益率受到利率，通胀等因素敏感影响。国债收益率与市场利率走向往往是正相关的，当市场利率走高时，国债收益率也跟随走高。另外国债收益率通常是隐含了对未来一段时间通胀水平的预期，高通胀下往往要求高国债收益率，比如今年9月和10月统计局披露CPI连连走高后，市场预期未来CPI还会走高，而国债收益率就受此影响走高了。所以，国债收益率走势变动就包含了大环境（利率，通胀）的变动。<br>
+<br>
+<br>
+全A-国债估值模型原理分析<br>
+<br>
+“全A-国债”估值模型的核心原理：市盈率中位数倒数（1/PE ）-10年国债收益率=风险溢价<br>
+<br>
+市盈率的倒数（1/PE），可以看做当前股票的投资报酬率。<br>
+<br>
+当风险溢价这个值为正数且越大时，说明股票市场情绪非常恐慌，大部分投资者在疯狂抛售股票致使股票估值非常低估。<br>
+<br>
+当风险溢价这个值为负数且越大时，说明股票市场情绪趋向乐观起来，大部分投资者看好股市，股票上涨致使估值达到泡沫阶段。<br>
+<br>
+所以风险溢价这个值的大小能更清楚更直观地给我们判断出股票市场究竟是高估了还是低估了。并且，当模型的风险溢价值出现极限值时往往代表着股票市场估值也处于极端状态。<br>
+<br>
+<br>
+全A-国债估值模型两大亮点<br>
+<br>
+亮点1：<br>
+<br>
+在股市上亏钱的人一般有两类，这两类人都是不懂估值的人，他们根本不知道市场究竟处于什么位置就盲目参与股市，所以说“无知”往往是亏钱的开始。<br>
+<br>
+一类是在熊市中盲目抄底，自以为股市已在底部区域，然后重仓抄底，结果真正的底部还没来就亏得受不了割肉离场了。<br>
+<br>
+另一类是在牛市高位，爆满的赚钱效应吸引很多人跑步进场或者让很多人上杠杆加筹码，结果股市泡沫崩盘，呜呼哀哉。07年10月后和15年5月后都是很多人巨亏破产噩梦的开始啊。<br>
+<br>
+而全A-国债估值模型在抄底逃顶上就有具体化的信息提示，它可以帮助那些不懂估值的人何时参与股市，何时逃离股市。<br>
+<br>
+如下图，模型的低点往往出现在牛市估值泡沫阶段；而高点往往出现在熊市末端估值的底部区域。<br>
+<br>
+<div class="aw-upload-img-list active">
+	<a href="./全A-国债估值模型功能说明 - 投资数据网_files/6256c4ba68c8599a0e8a79c69e19f535.jpg" target="_blank" data-fancybox-group="thumb" rel="lightbox"><img src="./全A-国债估值模型功能说明 - 投资数据网_files/6256c4ba68c8599a0e8a79c69e19f535.jpg" class="img-polaroid" title="35CE8296652724FE7A1531BA9F084EE7.jpg" alt="35CE8296652724FE7A1531BA9F084EE7.jpg"></a>
+</div>
+<br>
+<br>
+A股历轮牛市在高位估值泡沫时，风险溢价值基本在-2%和-3%之间。07年和15年那两轮大牛市高位区域风险溢价都处于极端值区域，比如07年最高点6124点的风险溢价值达到了-3.1%，这是模型的最低点；而15年牛市最高点5178点的风险溢价值也达到了-2.7%。那么我们就可以根据风险溢价值的低点判断股市是否处于泡沫阶段了。<br>
+<br>
+每一轮熊市出现最低点时，风险溢价值恰恰都大于 0 这个临界值之上。例如，05年熊市的988点；08年金融危机的1664点；12年大熊市的1949点；今年1月4号的2440点以及今年8月初的2733点。08年金融危机导致股市崩盘到1664点时的风险溢价值达到了2.6%，这是模型的最高点。<br>
+<br>
+认真观察上图你还会发现，其实风险溢价值在两端极限值待留的时间并不多，而是大部分时间风险溢价值都在-1%和-2%之间，这说明股市大部分时间估值都处于正常或微高估状态，这个信息是符合常理的，因为A股往往大部分时间都处于震荡市来磨掉压低估值。<br>
+<br>
+简单总结以上信息：<br>
+<br>
+当风险溢价值大于0时，这时股市估值正处于非常便宜，可以大规模进场买筹码。<br>
+当风险溢价值在-1%~0%之间，这时股市估值处于正常或微低估中，可以买入。<br>
+当风险溢价值在-1%~-2%之间，这时股市估值处于正常或微高估中，谨慎买入。<br>
+当风险溢价值在-2%~-3%之间，这时股市估值正处于泡沫阶段。即使不卖也不要进场买入。<br>
+<br>
+可能很多朋友不太相信当风险溢价值大于0就可以大规模抄底这个信息。<br>
+<br>
+我们就拿去年18年熊市举个例子，2018年6月19号当天暴跌收盘沪深300指数的市盈率为12.3倍，这么低市盈率叠加A股已经跌了半年情况下，相信那时很多人认为股市已经是处于底部区域了可以抄底了，然而那时抄底就是抄在了半山腰。<br>
+<br>
+在随后10月11号当天暴跌收盘后全A-国债估值模型才显示可以大规模抄底了（当天收盘风险溢价值才大于0）。而6月19号-10月11号沪深300指数跌了11%，中证1000指数在这期间跌了20%。更不用说后面上证指数在19年1月4日跌到2440点才见底。这期间指数都还跌这么多，个股股价更是早就腰斩了。<br>
+<br>
+所以说如果抄底的位置，抄底的时机不对，在漫漫熊市中，面对巨大浮亏你会相当难熬，相当痛苦，最后忍不住浮亏者在真正的底部割肉离场或稍有反弹就跑路了。<br>
+<br>
+<br>
+亮点2：<br>
+<br>
+全A-国债估值模型是用上文特殊选取数据得到的风险溢价值，那么说明模型的每一个风险溢价值就代表了当时资金基于当时市场环境给予的股票估值水平。所以对这些风险溢价值进行历史百分位法就更合理了。<br>
+<br>
+模型从2005年至今将近4000个交易日的风险溢价值，我对这些风险溢价值进行了比较，惊奇发现，当风险溢价值历史百分位低于12%时，往往股市会发生大级别反弹行情或者牛市，无一例外。<br>
+<br>
+所以当风险溢价值历史百分位低于12%以下的位置筹码，称作“历史大底”，这是历史性最便宜的筹码，从历史数据来看，在此以下买入，上涨概率较大。<br>
+<br>
+07年大牛市，上证指数从998点到6124点涨了近600%。<br>
+09年小牛，上证从1664点到3478点翻了1倍多。<br>
+15年大牛市，上证从1849点到5178点涨了近200%，创业板涨了近600%。<br>
+19年年初春耕反弹行情各指数也涨了25%＋；
+                                                                <div class="aw-upload-img-list">
+                                                                                                                                </div>
+                                
+                                                                <ul class="aw-upload-file-list">
+                                                                                                                                            </ul>
+                                                            </div>
+                            <div class="meta clearfix">
+                                <div class="aw-article-vote pull-left disabled">
+                                    <a href="javascript:;" class="agree" onclick=""><i class="icon icon-agree"></i> <b>9</b></a>
+                                                                    </div>
+
+                                <span class="pull-right  more-operate">
+                                    
+                                                                        <!--
+                                    <a class="text-color-999 dropdown-toggle" data-toggle="dropdown">
+                                        <i class="icon icon-share"></i> 分享                                    </a>
+                                    <div aria-labelledby="dropdownMenu" role="menu" class="aw-dropdown shareout pull-right">
+                                        <ul class="aw-dropdown-list">
+                                            <li><a onclick="AWS.User.share_out({webid: 'tsina', content: $(this).parents('.aw-question-detail').find('.markitup-box')});"><i class="icon icon-weibo"></i> 微博</a></li>
+											<li><a onclick="AWS.User.share_out({webid: 'qzone', content: $(this).parents('.aw-question-detail')});"><i class="icon icon-qzone"></i> QZONE</a></li>
+											<li><a onclick="AWS.User.share_out({webid: 'weixin', content: $(this).parents('.aw-question-detail')});"><i class="icon icon-wechat"></i> 微信</a></li>
+                                        </ul>
+                                    </div>
+                                    -->
+                                    <em class="text-color-999">2020-02-27</em>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="mod-footer">
+                                                        <div class="aw-article-voter">
+                                                                <a href="https://www.touzid.com/people/%E5%BC%A0%E6%B5%B7%E7%94%9F" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="张海生"><img alt="张海生" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/%E6%A9%99%E6%A9%99%EE%84%BC" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="橙橙"><img alt="橙橙" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/%E6%88%90%E7%91%B6%E7%91%B6" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="成瑶瑶"><img alt="成瑶瑶" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/%E4%B8%89%E8%90%AC%E8%8B%B1%E5%B0%BA" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="三萬英尺"><img alt="三萬英尺" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/%E4%B8%9C%E6%8B%BC%E8%A5%BF%E5%87%91" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="东拼西凑"><img alt="东拼西凑" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/qaz2025335" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="qaz2025335"><img alt="qaz2025335" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/Tang" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="Tang"><img alt="Tang" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/%E5%8F%82%E5%A3%B9%E6%A0%91" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="参壹树"><img alt="参壹树" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/ivlciyvd" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="ivlciyvd"><img alt="ivlciyvd" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <a href="https://www.touzid.com/people/%E8%AE%B8%E4%BB%A4" class="voter" data-toggle="tooltip" data-placement="right" data-original-title="许令"><img alt="许令" src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png"></a>
+                                                                <!--<a class="more-voters">...</a>-->
+                            </div>
+                                                    </div>
+                    </div>
+
+                    <!-- 文章评论 -->
+                    <div class="aw-mod">
+                        <div class="mod-head common-head">
+                            <h2>11 个评论</h2>
+                        </div>
+
+                        <div class="mod-body aw-feed-list">
+                            
+                                                                <div class="aw-item" id="answer_list_75">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/%E4%B8%9C%E6%8B%BC%E8%A5%BF%E5%87%91">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="东拼西凑">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/%E4%B8%9C%E6%8B%BC%E8%A5%BF%E5%87%91">东拼西凑</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            学习了                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-03-08 02:40</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_81">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/tedqiu">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="tedqiu">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/tedqiu">tedqiu</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            股市市盈率中位数为20（低估中），相当于未来收益率为1/22=4.5% 怎么不是1/20？                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-04-07 12:41</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_82">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/%E9%83%AD~%E5%9F%8E%E9%93%AD">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="郭~城铭">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/%E9%83%AD~%E5%9F%8E%E9%93%AD">郭~城铭</a> 回复 <a href="https://www.touzid.com/people/tedqiu">tedqiu</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            同问                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-04-12 11:10</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_83">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/01_avatar_mid.jpg" alt="无序">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">无序</a> 回复 <a href="https://www.touzid.com/people/%E9%83%AD~%E5%9F%8E%E9%93%AD">郭~城铭</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            算法没错，看你选哪个指数，如果是沪深全A，现在的中位数是41左右，1/41=0.0243<br>
+国债十年期收益率是，0.251，0.0243-0.0251 =-0.0008（2020年04月08日中午节点数据）如图：https://www.touzid.com/model/rm-rf.html                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-04-12 11:12</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_98">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/cqbhviul">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="cqbhviul">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/cqbhviul">cqbhviul</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            请问10年国债到期收益率用的是中债的么                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-05-25 17:19</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_114">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/xuqrmndt">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="xuqrmndt">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/xuqrmndt">xuqrmndt</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            请问下，沪深全A收盘点位是什么点位？不是上海市场也不是深圳市场的。                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-07-27 09:59</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_115">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/01_avatar_mid.jpg" alt="无序">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">无序</a> 回复 <a href="https://www.touzid.com/people/xuqrmndt">xuqrmndt</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            中证全指：https://www.touzid.com/indice/fundamental.html#/sh000985                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-07-27 10:01</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_116">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/xuqrmndt">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="xuqrmndt">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/xuqrmndt">xuqrmndt</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            还有个问题，图中中下处那条红色的虚线代表啥意思？红虚线以下是危险区域吗？                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-07-27 10:09</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_117">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/xuqrmndt">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="xuqrmndt">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/xuqrmndt">xuqrmndt</a> 回复 <a href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">无序</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            加权平均值 等权平均值 算术平均值 中位数，用的哪种呢？看你的习惯应该是中位数把？                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-07-27 17:03</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_118">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/xuqrmndt">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="xuqrmndt">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/xuqrmndt">xuqrmndt</a> 回复 <a href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">无序</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            刚才的回复表达有点问题，股债收益率模型(EY-BY)的市盈率（TTM）也是用的中证全指的吗？加权平均值 等权平均值 算术平均值 中位数，用的哪种呢？                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-07-27 17:07</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_124">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/xguxbgjh">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/avatar-mid-img.png" alt="xguxbgjh">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/xguxbgjh">xguxbgjh</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            国债收益率模型的说明中使用数据源是沪深全A股票收益率（中位数），那图表中的数据说明是加权平均，两者不一致，我感觉应当是中位数。                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-08-04 10:09</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                <div class="aw-item" id="answer_list_125">
+                                    <div class="mod-head">
+                                        <a class="aw-user-img aw-border-radius-5" href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">
+                                            <img src="./全A-国债估值模型功能说明 - 投资数据网_files/01_avatar_mid.jpg" alt="无序">
+                                        </a>
+                                        <p>
+                                            <a href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123">无序</a> 回复 <a href="https://www.touzid.com/people/xguxbgjh">xguxbgjh</a>                                        </p>
+                                    </div>
+                                    <div class="mod-body">
+                                        <div class="markitup-box">
+                                            加权还是中位数，页面上可选择的条件                                        </div>
+                                    </div>
+                                    <div class="mod-footer">
+                                        <div class="meta">
+                                            <span class="pull-right text-color-999">2020-08-04 14:54</span>
+                                                                                    </div>
+                                    </div>
+                                </div>
+                                                                                    </div>
+
+                        
+                                            </div>
+                    <!-- end 文章评论 -->
+
+                    <!-- 回复编辑器 -->
+                    <div class="aw-mod aw-article-replay-box">
+                        <a name="answer_form"></a>
+                                                <p align="center">要回复文章请先<a href="https://www.touzid.com/account/login/">登录</a>或<a href="https://www.touzid.com/account/register/">注册</a></p>
+                                            </div>
+                    <!-- end 回复编辑器 -->
+                </div>
+                <!-- 侧边栏 -->
+                <div class="col-sm-12 col-md-3 aw-side-bar hidden-sm hidden-xs">
+                    <!-- 发起人 -->
+                                        <div class="aw-mod user-detail">
+                        <div class="mod-head">
+                            <h3>发起人</h3>
+                        </div>
+                        <div class="mod-body">
+                            <dl>
+                                <dt class="pull-left aw-border-radius-5">
+                                    <a href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123"><img alt="无序" src="./全A-国债估值模型功能说明 - 投资数据网_files/01_avatar_mid.jpg"></a>
+                                </dt>
+                                <dd class="pull-left">
+                                    <a class="aw-user-name" href="https://www.touzid.com/people/%E6%97%A0%E5%BA%8F123" data-id="1">无序</a>
+                                                                            <i class="icon-v" title="个人认证"></i>
+                                    
+                                                                        <p></p>
+                                </dd>
+                            </dl>
+                        </div>
+                        <div class="mod-footer clearfix">
+                                                        <div class="aw-topic-bar">
+                                <div class="topic-bar clearfix">
+                                    <span class="pull-left text-color-999">
+                                        擅长话题 : &nbsp;
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="https://www.touzid.com/topic/%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84" class="text" data-id="36">价值投资</a>
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="https://www.touzid.com/topic/%E6%9D%8E%E5%BD%95" class="text" data-id="22">李录</a>
+                                    </span>
+                                                                        <span class="topic-tag">
+                                        <a href="https://www.touzid.com/topic/%E6%9F%A5%E7%90%86%C2%B7%E8%8A%92%E6%A0%BC" class="text" data-id="14">查理·芒格</a>
+                                    </span>
+                                                                    </div>
+                            </div>
+                                                    </div>
+                    </div>
+                                        <!-- end 发起人 -->
+
+                    
+                                        <!-- 相关问题 -->
+                    <div class="aw-mod aw-text-align-justify question-related-list">
+                        <div class="mod-head">
+                            <h3>相关问题</h3>
+                        </div>
+                        <div class="mod-body font-size-12">
+                            <ul>
+                                                                <li><a href="https://www.touzid.com/question/5475">指数估值追加邀请</a></li>
+                                                                <li><a href="https://www.touzid.com/question/15">基本面选股功能使用说明</a></li>
+                                                                <li><a href="https://www.touzid.com/question/5430">指数的估值数据可以精确到日吗？（目前精确到月）</a></li>
+                                                                <li><a href="https://www.touzid.com/question/23">分析制图功能使用说明</a></li>
+                                                                <li><a href="https://www.touzid.com/question/5535">国债收益率好久没有更新了</a></li>
+                                                                <li><a href="https://www.touzid.com/question/5481">可否在股债收益率模型中添加 指数PE加权平均数和国债利率的 图线 而不仅是中位数</a></li>
+                                                                <li><a href="https://www.touzid.com/question/332">保险行业能否增加PEV估值</a></li>
+                                                                <li><a href="https://www.touzid.com/question/5418">能否增加德国DAX指数，日经225指数，标普500指数等海外主流指数估值数据?</a></li>
+                                                                <li><a href="https://www.touzid.com/question/778">功能bug</a></li>
+                                                                <li><a href="https://www.touzid.com/question/780">希望能每周能免费用几次功能类似的</a></li>
+                                                                <li><a href="https://www.touzid.com/question/725">上传附件功能在哪里？</a></li>
+                                                            </ul>
+                        </div>
+                    </div>
+                    <!-- end 相关问题 -->
+                                    </div>
+                <!-- end 侧边栏 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var ANSWER_EDIT_TIME = 30;
+
+    $(document).ready(function () {
+        if ($('.aw-article-vote.disabled').length)
+        {
+            $('.aw-article-vote.disabled a').attr('onclick', '');
+        }
+
+        AWS.at_user_lists('#wmd-input');
+
+        AWS.Init.init_article_comment_box($('.aw-article-comment'));
+    });
+</script>
+
+<div class="aw-footer-wrap">
+	<div class="aw-footer">
+		Copyright © 2020<span class="hidden-xs"> - <a href="http://www.beian.miit.gov.cn/">闽ICP备20005226号-1</a>, All Rights Reserved</span>
+
+		<span class="hidden-xs">Powered By <a href="http://www.touzid.com/" target="blank">投资数据</a></span>
+
+			</div>
+</div>
+
+<a class="aw-back-top hidden-xs" href="javascript:;" onclick="$.scrollTo(1, 600, {queue:true});" style="display: inline;"><i class="icon icon-up"></i></a>
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c0219d21ca52d4d5bb3d64c64189ef01";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<div id="aw-ajax-box" class="aw-ajax-box"></div>
+
+<div style="display:none;" id="__crond"><img src="./全A-国债估值模型功能说明 - 投资数据网_files/1603809927" width="1" height="1"></div>
+<!-- Escape time: 0.098526000976562 --><!-- / DO NOT REMOVE -->
+<div class="social-share share-component" data-sites="wechat, qq, qzone, weibo"><a class="social-share-icon icon-wechat" href="javascript:"><div class="wechat-qrcode"><h4>微信扫一扫：分享</h4><div class="qrcode" title="https://www.touzid.com/article/4925"><canvas width="100" height="100" style="display: none;"></canvas><img alt="Scan me!" src="data:image/png;base64,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" style="display: block;"></div><div class="help"><p>微信里点“发现”，扫一下</p><p>二维码便可将本文分享至朋友圈。</p></div></div></a><a class="social-share-icon icon-qq" href="http://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.touzid.com%2Farticle%2F4925&amp;title=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E6%8A%95%E8%B5%84%E6%95%B0%E6%8D%AE%E7%BD%91&amp;source=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E6%8A%95%E8%B5%84%E6%95%B0%E6%8D%AE%E7%BD%91&amp;desc=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E8%82%A1%E5%80%BA%E6%94%B6%E7%9B%8A%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%88EYBY%EF%BC%89%EF%BC%8C%E6%9C%89%E7%9A%84%E7%A0%94%E6%8A%A5%E5%8F%88%E7%A7%B0%E4%B8%BA%E2%80%9C%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E2%80%9D%EF%BC%8C%E5%AE%83%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BB%8F%E5%85%B8%E7%9A%84%E8%82%A1%E5%B8%82%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E6%98%AF%E5%B0%86%E2%80%9C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88EY%EF%BC%89%E4%B8%8E%E2%80%9C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88BY%EF%BC%89%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94%EF%BC%8C%E8%AE%A1%E7%AE%97%E5%87%BA(EY-BY)%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E6%AD%A3%E6%95%B0%EF%BC%8C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E8%B4%9F%E6%95%B0%EF%BC%8C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%E3%80%82%0A%C2%A0%0A...&amp;pics=https%3A%2F%2Fwww.touzid.com%2Fstatic%2Fimg%2Flogo.png&amp;summary=%22%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E8%82%A1%E5%80%BA%E6%94%B6%E7%9B%8A%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%88EYBY%EF%BC%89%EF%BC%8C%E6%9C%89%E7%9A%84%E7%A0%94%E6%8A%A5%E5%8F%88%E7%A7%B0%E4%B8%BA%E2%80%9C%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E2%80%9D%EF%BC%8C%E5%AE%83%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BB%8F%E5%85%B8%E7%9A%84%E8%82%A1%E5%B8%82%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E6%98%AF%E5%B0%86%E2%80%9C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88EY%EF%BC%89%E4%B8%8E%E2%80%9C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88BY%EF%BC%89%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94%EF%BC%8C%E8%AE%A1%E7%AE%97%E5%87%BA(EY-BY)%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E6%AD%A3%E6%95%B0%EF%BC%8C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E8%B4%9F%E6%95%B0%EF%BC%8C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%E3%80%82%0A%C2%A0%0A...%22" target="_blank"></a><a class="social-share-icon icon-qzone" href="http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https%3A%2F%2Fwww.touzid.com%2Farticle%2F4925&amp;title=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E6%8A%95%E8%B5%84%E6%95%B0%E6%8D%AE%E7%BD%91&amp;desc=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E8%82%A1%E5%80%BA%E6%94%B6%E7%9B%8A%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%88EYBY%EF%BC%89%EF%BC%8C%E6%9C%89%E7%9A%84%E7%A0%94%E6%8A%A5%E5%8F%88%E7%A7%B0%E4%B8%BA%E2%80%9C%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E2%80%9D%EF%BC%8C%E5%AE%83%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BB%8F%E5%85%B8%E7%9A%84%E8%82%A1%E5%B8%82%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E6%98%AF%E5%B0%86%E2%80%9C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88EY%EF%BC%89%E4%B8%8E%E2%80%9C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88BY%EF%BC%89%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94%EF%BC%8C%E8%AE%A1%E7%AE%97%E5%87%BA(EY-BY)%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E6%AD%A3%E6%95%B0%EF%BC%8C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E8%B4%9F%E6%95%B0%EF%BC%8C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%E3%80%82%0A%C2%A0%0A...&amp;summary=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E8%82%A1%E5%80%BA%E6%94%B6%E7%9B%8A%E7%8E%87%E6%A8%A1%E5%9E%8B%EF%BC%88EYBY%EF%BC%89%EF%BC%8C%E6%9C%89%E7%9A%84%E7%A0%94%E6%8A%A5%E5%8F%88%E7%A7%B0%E4%B8%BA%E2%80%9C%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E2%80%9D%EF%BC%8C%E5%AE%83%E6%98%AF%E4%B8%80%E4%B8%AA%E7%BB%8F%E5%85%B8%E7%9A%84%E8%82%A1%E5%B8%82%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%EF%BC%8C%E5%85%B6%E5%9F%BA%E6%9C%AC%E6%80%9D%E6%83%B3%E6%98%AF%E5%B0%86%E2%80%9C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88EY%EF%BC%89%E4%B8%8E%E2%80%9C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E2%80%9D%EF%BC%88BY%EF%BC%89%E8%BF%9B%E8%A1%8C%E5%AF%B9%E6%AF%94%EF%BC%8C%E8%AE%A1%E7%AE%97%E5%87%BA(EY-BY)%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E6%AD%A3%E6%95%B0%EF%BC%8C%E8%82%A1%E7%A5%A8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%EF%BC%8C%E5%BD%93%E8%AF%A5%E6%95%B0%E5%80%BC%E4%B8%BA%E8%B4%9F%E6%95%B0%EF%BC%8C%E5%80%BA%E5%88%B8%E6%94%B6%E7%9B%8A%E7%8E%87%E6%9B%B4%E9%AB%98%E3%80%82%0A%C2%A0%0A...&amp;site=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E6%8A%95%E8%B5%84%E6%95%B0%E6%8D%AE%E7%BD%91" target="_blank"></a><a class="social-share-icon icon-weibo" href="https://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.touzid.com%2Farticle%2F4925&amp;title=%E5%85%A8A-%E5%9B%BD%E5%80%BA%E4%BC%B0%E5%80%BC%E6%A8%A1%E5%9E%8B%E5%8A%9F%E8%83%BD%E8%AF%B4%E6%98%8E%20-%20%E6%8A%95%E8%B5%84%E6%95%B0%E6%8D%AE%E7%BD%91&amp;pic=https%3A%2F%2Fwww.touzid.com%2Fstatic%2Fimg%2Flogo.png&amp;appkey=" target="_blank"></a></div>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/social-share.min.js"></script>
+<script src="./全A-国债估值模型功能说明 - 投资数据网_files/qrcode.min.js"></script>
+
+
+</body></html>
