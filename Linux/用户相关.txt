@@ -1,1 +1,5 @@
 whoami 查看本用户是谁？
+
+
+
+sudo -i 切换root用户
