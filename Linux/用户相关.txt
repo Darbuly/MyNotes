@@ -3,3 +3,7 @@ whoami 查看本用户是谁？
 
 
 sudo -i 切换root用户
+
+
+//以某个身份执行命令
+su  - www56 -c  "nohup php /home/www/sortall_2021/wechat_order/artisan swoole start&"
