@@ -1,0 +1,1 @@
+zend_extension加载php扩展时需用全路径，而extension加载时可以用相对extension_dir的路径。
