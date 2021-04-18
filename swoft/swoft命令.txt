@@ -1,0 +1,1 @@
+ swoftcli run -c http:start
