@@ -1,1 +1,4 @@
  swoftcli run -c http:start
+
+
+php ./bin/swoft entity:create --table=users
