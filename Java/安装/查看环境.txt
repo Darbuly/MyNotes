@@ -1,0 +1,8 @@
+ps -ef | grep 'tomcat' 查看tomcat所在位置
+
+sh version.sh
+
+
+
+echo $JAVA_HOME
+
