@@ -1,5 +1,6 @@
 Centos查看系统版本
 cat /etc/redhat-release
 
+cat /etc/issue
 
 uname -srm
