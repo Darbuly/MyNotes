@@ -12,3 +12,6 @@ su  - www56 -c  "nohup php /home/www/sortall_2021/wechat_order/artisan swoole st
 添加用户组和用户：
 #groupadd www72
 #useradd -g www72 www72
+
+改密码
+passwd root
