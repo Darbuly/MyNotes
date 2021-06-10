@@ -1,0 +1,20 @@
+# Base image
+FROM run/jre:7u80
+MAINTAINER wangwenwei <970073804@qq.com>
+LABEL Description="This image is used to run tomcat9 with jre8."  Version="1.0"
+
+ENV CATALINA_HOME /var/lib/tomcat9
+ENV PATH $CATALINA_HOME/bin:$PATH
+
+ADD apache-tomcat-9.0.46.tar.gz  /var/lib/
+RUN mv /var/lib/apache-tomcat-9.0.46 /var/lib/tomcat9 \
+    && rm -rf /var/lib/tomcat9/apache-tomcat-9.0.46/bin/*.bat
+
+WORKDIR /var/lib/tomcat9/bin
+EXPOSE 8080
+CMD ["catalina.sh", "run"]
+
+
+
+
+

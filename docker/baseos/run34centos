@@ -1,0 +1,7 @@
+#Base os image
+FROM  centos:centos7.6.1810
+MAINTAINER Wangwenwei <970074804@qq.com>
+LABEL Description="This image is the base os images."  Version="1.0"
+# reconfig timezone
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+
