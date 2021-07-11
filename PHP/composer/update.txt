@@ -1,0 +1,7 @@
+composer update --prefer-dist
+
+--prefer-dist 当有可用的包时，从 dist 安装。
+
+
+======
+
