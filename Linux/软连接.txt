@@ -1,0 +1,4 @@
+ln -sf /usr/local/php/php56/bin/php /usr/bin/
+
+-s = soft，意为软链接
+-f = force，表示强制创建（使用前请备份之前存在文件）
