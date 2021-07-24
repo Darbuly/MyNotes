@@ -1,0 +1,192 @@
+
+upstream  drupal_nodes {
+     server 127.0.0.1:28080 fail_timeout=5s max_fails=2;
+
+     #server 123.57.185.140:xxxx  backup;
+}
+
+server {
+    listen       80;
+    server_name  www.t-matrix.com www.t-matrix.cn www.t-matrix.com.cn t-matrix.ruuuun.com;
+    error_log /home/logs/rginx/t-matrix-error.log;
+    access_log /home/logs/rginx/t-matrix-access.log;
+
+
+#    location / {
+#        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+#
+#        proxy_redirect off;
+#        proxy_set_header Host $host;
+#        proxy_set_header X-Real-IP $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_pass http://drupal_nodes/drupal/;
+#    }
+#
+#    location /drupal/ {
+#        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+#
+#        proxy_redirect off;
+#        proxy_set_header Host $host;
+#        proxy_set_header X-Real-IP $remote_addr;
+#        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+#        proxy_pass http://drupal_nodes/drupal/;
+#    }
+
+location ~* ^.+\.(ico|gif|jpg|jpeg|png|html|htm|css|js)$ {
+        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://drupal_nodes;
+}
+
+    location / {
+
+	set $is_mobile false;	
+
+	if ( $http_cookies ~* "ACCESS_TERMINAL=mobile") {
+		set $is_mobile true;
+	}
+
+	if ( $http_user_agent ~* (android|ip(ad|hone|od)|kindle|blackberry|windows\s(ce|phone))){
+		set $is_mobile true;
+	}
+
+	if ( $is_mobile = true ) {
+		rewrite "^/(.*)$" /mobile/$1 redirect;
+		break;
+	}
+
+        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://drupal_nodes/drupal/;
+    }
+
+
+
+    location /mobile {
+
+        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+
+	set $is_mobile false;	
+	set $final_url http://drupal_nodes/drupal/mobile;
+
+	if ($request_uri ~ /mobile/(.*))
+	{
+	set $final_url http://drupal_nodes/drupal/mobile/$1;
+	}
+
+	if ( $http_cookies ~* "ACCESS_TERMINAL=mobile") {
+		set $is_mobile true;
+	}
+
+	if ( $http_user_agent ~* (android|ip(ad|hone|od)|kindle|blackberry|windows\s(ce|phone))){
+		set $is_mobile true;
+	}
+
+	if ( $is_mobile = true ) {
+        	proxy_pass $final_url;
+		break;
+	}
+	rewrite "^/mobile/(.*)$" /$1 redirect;
+
+    }
+
+
+    location /drupal/ {
+
+        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+	set $is_mobile false;	
+
+	if ( $http_cookies ~* "ACCESS_TERMINAL=mobile") {
+		set $is_mobile true;
+	}
+
+	if ( $http_user_agent ~* (android|ip(ad|hone|od)|kindle|blackberry|windows\s(ce|phone))){
+		set $is_mobile true;
+	}
+
+	if ( $is_mobile = true ) {
+		rewrite "^/drupal/(.*)$" /mobile/$1 redirect;
+		break;
+	}
+        proxy_pass http://drupal_nodes/drupal/;
+    }
+
+
+    location /test/ {
+
+        proxy_next_upstream  error timeout http_502 http_503 http_504 ;
+
+        proxy_redirect off;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+	set $is_mobile false;	
+	set $final_url http://drupal_nodes/drupal/;
+
+	if ( $http_cookies ~* "ACCESS_TERMINAL=mobile") {
+		set $is_mobile true;
+	}
+
+	if ( $http_user_agent ~* (android|ip(ad|hone|od)|kindle|blackberry|windows\s(ce|phone))){
+		set $is_mobile true;
+	}
+#	if ( $is_mobile = true ) {
+#		rewrite "^/(.*)$" /mobile last;
+#		break;
+#	}
+
+	if ( $is_mobile = true ) {
+		rewrite "^/test/(.*)$" /test/mobile/ last;
+	}
+
+        proxy_pass $final_url;
+
+    }
+
+
+
+}
+
+server {
+    listen       80;
+    server_name  qr.t-matrix.com;
+
+    rewrite ^/(.*) http://www.t-matrix.com/$1 permanent;
+}
+
+server {
+    listen       80;
+    server_name  t-matrix.com;
+    rewrite ^/(.*) http://www.t-matrix.com/$1 permanent;
+}
+server {
+    listen       80;
+    server_name  t-matrix.cn;
+    rewrite ^/(.*) http://www.t-matrix.cn/$1 permanent;
+}
+server {
+    listen       80;
+    server_name  t-matrix.com.cn;
+    rewrite ^/(.*) http://www.t-matrix.com.cn/$1 permanent;
+}
+
